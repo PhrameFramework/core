@@ -88,6 +88,16 @@ class Request
     }
 
     /**
+     * Returns request method
+     * 
+     * @return  string
+     */
+    public function method()
+    {
+        return $this->server('request_method') ?: 'GET';
+    }
+
+    /**
      * Returns server parameter
      * 
      * @param   string  $name   Parameter name

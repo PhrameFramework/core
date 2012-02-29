@@ -246,7 +246,10 @@ class Response
             header($header, false);
         }
 
-        return $output;
+        if ($this->application->request->method() !== 'HEAD')
+        {
+            return $output;
+        }
     }
 
 }
