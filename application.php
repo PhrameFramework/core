@@ -98,7 +98,13 @@ class Application
         // Load packages
         foreach ($this->config->packages as $package)
         {
-            call_user_func('\\Phrame\\'.ucfirst(strtolower($package)).'\\Bootstrap::init', $this);
+            $package_path       = explode('/', $package);
+            $package_namespace  = '';
+            foreach ($package_path as $item)
+            {
+                $package_namespace .= '\\'.ucfirst(strtolower($item));
+            }
+            call_user_func($package_namespace.'\\Bootstrap::init', $this);
         }
     }
 

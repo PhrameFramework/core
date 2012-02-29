@@ -21,8 +21,8 @@ return array(
     /**
      * Packages to load
      */
-    'packages'       => array(
-        //'activerecord',
+    'packages'         => array(
+        //'phrame/activerecord',
 
     ),
 
