@@ -187,7 +187,7 @@ class Response
      */
     public function render($render_layout = true)
     {
-        $controller_name  = 'Applications\\'.ucfirst($this->application->name).'\\Controllers\\'.ucfirst($this->application->route->controller);
+        $controller_name  = ucfirst($this->application->name).'\\Controllers\\'.ucfirst($this->application->route->controller);
         $controller       = new $controller_name($this->application);
         $action           = $this->application->route->action;
         $parameters       = $this->application->route->parameters;

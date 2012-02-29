@@ -81,7 +81,7 @@ class Route
         unset($path_info[1]);
         $this->parameters  = $path_info;
 
-        $routable = is_file(APPLICATIONS_PATH.'/'.$this->application->name.'/controllers/'.$this->controller.'.php') && method_exists('Applications\\'.ucfirst($this->application->name).'\\Controllers\\'.ucfirst($this->controller), $this->action);
+        $routable = is_file(APPLICATIONS_PATH.'/'.$this->application->name.'/controllers/'.$this->controller.'.php') && method_exists(ucfirst($this->application->name).'\\Controllers\\'.ucfirst($this->controller), $this->action);
 
         if ( ! $routable)
         {
