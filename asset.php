@@ -29,11 +29,11 @@ class Asset
     protected $config = null;
 
     /**
-     * Asset file prefix
+     * Asset directory prefix
      * 
      * @var  string
      */
-    protected $file_prefix = '';
+    protected $prefix = '';
 
     /**
      * Constructs Asset object
@@ -44,7 +44,7 @@ class Asset
     {
         $this->application  = $application ?: Application::instance();
         $this->config       = new Config('asset', $this->application);
-        $this->file_prefix  = md5($this->application->name);
+        $this->prefix       = md5($this->application->name);
     }
 
     /**
@@ -57,14 +57,9 @@ class Asset
      */
     public function render_asset($file_name, $asset_type, $attributes = array())
     {
-        $fn    = explode('/', $file_name);
-        $file  = $this->file_prefix.'-'.array_pop($fn);
-        $dir   = implode('/', $fn);
-        $dir  .= ! empty($dir) ? '/' : '';
-
         $theme_file   = APPLICATIONS_PATH.'/'.$this->application->name.'/themes/'.$this->application->config->theme.'/assets/'.$asset_type.'/'.$file_name;
-        $public_file  = PUBLIC_PATH.'/assets/'.$asset_type.'/'.$dir.$file;
-        $public_url   = $this->application->config->base_url.'/assets/'.$asset_type.'/'.$dir.$file;
+        $public_file  = PUBLIC_PATH.'/assets/'.$this->prefix.'/'.$asset_type.'/'.$file_name;
+        $public_url   = $this->application->config->base_url.'/assets/'.$this->prefix.'/'.$asset_type.'/'.$file_name;
 
         if ( ! is_file($public_file) or filemtime($public_file) != filemtime($theme_file))
         {
