@@ -98,13 +98,8 @@ class Application
         // Load packages
         foreach ($this->config->packages as $package)
         {
-            $package_path       = explode('/', $package);
-            $package_namespace  = '';
-            foreach ($package_path as $item)
-            {
-                $package_namespace .= '\\'.ucfirst(strtolower($item));
-            }
-            call_user_func($package_namespace.'\\Bootstrap::init', $this);
+            // Call package's init (\Phrame\Activerecord\Bootstrap::init($this) for example)
+            call_user_func('\\'.str_replace(' ', '\\', ucwords(str_replace('/', ' ', strtolower($package)))).'\\Bootstrap::init', $this);
         }
     }
 
