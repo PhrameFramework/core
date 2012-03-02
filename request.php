@@ -79,13 +79,24 @@ class Request
     }
 
     /**
+     * Escapes data
+     * 
+     * @param   string  $data  Data to escape
+     * @return  string
+     */
+    public function escape($data)
+    {
+        return htmlspecialchars($data, ENT_QUOTES, 'UTF-8');
+    }
+
+    /**
      * Returns protocol
      * 
      * @return  string
      */
     public function protocol()
     {
-        return $this->server('server_protocol') ?: 'HTTP/1.1';
+        return $this->escape($this->server('server_protocol')) ?: 'HTTP/1.1';
     }
 
     /**
@@ -95,7 +106,7 @@ class Request
      */
     public function method()
     {
-        return $this->server('request_method') ?: 'GET';
+        return $this->escape($this->server('request_method')) ?: 'GET';
     }
 
     /**
@@ -117,7 +128,7 @@ class Request
             $this->server[strtoupper($name)] = $value;
         }
 
-        return isset($this->server[strtoupper($name)]) ? $this->server[strtoupper($name)] : null;
+        return isset($this->server[strtoupper($name)]) ? $this->escape($this->server[strtoupper($name)]) : null;
     }
 
     /**
@@ -139,7 +150,7 @@ class Request
             $this->get[$name] = $value;
         }
 
-        return isset($this->get[$name]) ? $this->get[$name] : null;
+        return isset($this->get[$name]) ? $this->escape($this->get[$name]) : null;
     }
 
     /**
@@ -161,7 +172,7 @@ class Request
             $this->post[$name] = $value;
         }
 
-        return isset($this->post[$name]) ? $this->post[$name] : null;
+        return isset($this->post[$name]) ? $this->escape($this->post[$name]) : null;
     }
 
     /**
@@ -183,7 +194,7 @@ class Request
             $this->cookie[$name] = $value;
         }
 
-        return isset($this->cookie[$name]) ? $this->cookie[$name] : null;
+        return isset($this->cookie[$name]) ? $this->escape($this->cookie[$name]) : null;
     }
 
     /**
@@ -205,7 +216,7 @@ class Request
             $this->session[$name] = $value;
         }
 
-        return isset($this->session[$name]) ? $this->session[$name] : null;
+        return isset($this->session[$name]) ? $this->escape($this->session[$name]) : null;
     }
 
 }
