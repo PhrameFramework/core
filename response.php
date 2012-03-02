@@ -106,7 +106,8 @@ class Response
     /**
      * Constructs Response object
      * 
-     * @param  Application  $application  Application object
+     * @param   Application  $application  Application object
+     * @return  void
      */
     public function __construct($application = null)
     {
@@ -117,7 +118,8 @@ class Response
     /**
      * Sets response status
      * 
-     * @param  int  $status  Status code
+     * @param   int  $status  Status code
+     * @return  void
      */
     public function status($status)
     {
@@ -127,7 +129,8 @@ class Response
     /**
      * Add header
      * 
-     * @param  string  $header  Header
+     * @param   string  $header  Header
+     * @return  void
      */
     public function header($header)
     {
@@ -137,13 +140,14 @@ class Response
     /**
      * Add cookie
      * 
-     * @param  string  $name      Cookie name
-     * @param  string  $value     Cookie value
-     * @param  int     $expire    Expire
-     * @param  string  $path      Cookie path
-     * @param  string  $domain    Cookie domain
-     * @param  bool    $secure    Is the cookie secure?
-     * @param  bool    $httponly  Is the cookie http only?
+     * @param   string  $name      Cookie name
+     * @param   string  $value     Cookie value
+     * @param   int     $expire    Expire
+     * @param   string  $path      Cookie path
+     * @param   string  $domain    Cookie domain
+     * @param   bool    $secure    Is the cookie secure?
+     * @param   bool    $httponly  Is the cookie http only?
+     * @return  void
      */
     public function cookie($name, $value, $expire = null, $path = null, $domain = null, $secure = null, $httponly = null)
     {
@@ -161,8 +165,9 @@ class Response
     /**
      * Add session parameter
      * 
-     * @param  string  $name   Parameter name
-     * @param  string  $value  Parameter value
+     * @param   string  $name   Parameter name
+     * @param   string  $value  Parameter value
+     * @return  void
      */
     public function session($name, $value)
     {
@@ -172,7 +177,8 @@ class Response
     /**
      * Redirects to the url
      * 
-     * @param  string  $url  URL
+     * @param   string  $url  URL
+     * @return  void
      */
     public function redirect($url)
     {

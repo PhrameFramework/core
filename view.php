@@ -52,9 +52,10 @@ class View
     /**
      * Creates View object
      * 
-     * @param  string       $view_name    View name
-     * @param  array        $data         Data for view
-     * @param  Application  $application  Application object
+     * @param   string       $view_name    View name
+     * @param   array        $data         Data for view
+     * @param   Application  $application  Application object
+     * @return  void
      */
     public function __construct($view_name, $data = array(), $application = null)
     {
@@ -79,8 +80,9 @@ class View
     /**
      * Sets data for view
      * 
-     * @param  string  $name   Data name
-     * @param  mixed   $value  Data value
+     * @param   string  $name   Data name
+     * @param   mixed   $value  Data value
+     * @return  void
      */
     public function __set($name, $value)
     {

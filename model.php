@@ -38,7 +38,8 @@ class Model
     /**
      * Constructs model
      * 
-     * @param  array  $row  Initial data
+     * @param   array  $row  Initial data
+     * @return  void
      */
     public function __construct($row = array())
     {
@@ -60,8 +61,9 @@ class Model
     /**
      * Sets row
      * 
-     * @param  string  $name   Attribute name
-     * @param  mixed   $value  Attribute value
+     * @param   string  $name   Attribute name
+     * @param   mixed   $value  Attribute value
+     * @return  void
      */
     public function __set($name, $value)
     {
@@ -70,6 +72,8 @@ class Model
 
     /**
      * Saves row to the storage
+     * 
+     * @return  void
      */
     public function save()
     {
@@ -87,6 +91,8 @@ class Model
 
     /**
      * Deletes data from the storage
+     * 
+     * @return  void
      */
     public function delete()
     {

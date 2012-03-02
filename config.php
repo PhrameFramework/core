@@ -24,9 +24,10 @@ class Config
     /**
      * Contsructs Config object
      * 
-     * @param  string  $config_name  Configuration name
-     * @param  string  $application  Application object
-     * @param  string  $package      Package name
+     * @param   string  $config_name  Configuration name
+     * @param   string  $application  Application object
+     * @param   string  $package      Package name
+     * @return  void
      */
     public function __construct($config_name = null, $application = null, $package = 'phrame/core')
     {
@@ -85,6 +86,7 @@ class Config
      * 
      * @param   string  $name   Option name
      * @param   mixed   $value  Option value
+     * @return  void
      */
     public function __set($name, $value)
     {

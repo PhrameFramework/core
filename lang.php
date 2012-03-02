@@ -59,7 +59,8 @@ class Lang
     /**
      * Constructs Lang object
      * 
-     * @param  Application  $application  Application object
+     * @param   Application  $application  Application object
+     * @return  void
      */    
     public function __construct($application = null)
     {

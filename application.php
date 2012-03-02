@@ -59,7 +59,8 @@ class Application
     /**
      * Application constructor (protected)
      *
-     * @param  string  $name  Application name
+     * @param   string  $name  Application name
+     * @return  void
      */
     protected function __construct($name = '')
     {
@@ -152,6 +153,8 @@ class Application
 
     /**
      * Process default request and renders response
+     * 
+     * @return  void
      */
     public function run()
     {

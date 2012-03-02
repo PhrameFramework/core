@@ -31,7 +31,8 @@ class Controller
     /**
      * Constructs Controller object
      * 
-     * @param  Application  $application  Application object
+     * @param   Application  $application  Application object
+     * @return  void
      */
     public function __construct($application = null)
     {
@@ -40,6 +41,8 @@ class Controller
 
     /**
      * 404 handler
+     * 
+     * @return  void
      */
     public function error_404()
     {
@@ -49,8 +52,9 @@ class Controller
     /**
      * Handles unroutable calls
      *
-     * @param  string  $method
-     * @param  array   $parameters
+     * @param   string  $method
+     * @param   array   $parameters
+     * @return  void
      */
     public function __call($method, $parameters)
     {

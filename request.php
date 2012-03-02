@@ -59,12 +59,13 @@ class Request
     /**
      * Constructs Request object
      * 
-     * @param  Application  $application  Application object
-     * @param  array        $server       Server parameters
-     * @param  array        $get          Get parameters
-     * @param  array        $post         Post parameters
-     * @param  array        $cookie       Cookie parameters
-     * @param  array        $session      Session parameters
+     * @param   Application  $application  Application object
+     * @param   array        $server       Server parameters
+     * @param   array        $get          Get parameters
+     * @param   array        $post         Post parameters
+     * @param   array        $cookie       Cookie parameters
+     * @param   array        $session      Session parameters
+     * @return  void
      */
     public function __construct($application = null, $server = array(), $get = array(), $post = array(), $cookie = array(), $session = array())
     {

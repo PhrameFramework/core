@@ -53,6 +53,7 @@ class Route
      * Creates Route object
      * 
      * @param   Application  $application  Application object
+     * @return  void
      */
     public function __construct($application = null)
     {
