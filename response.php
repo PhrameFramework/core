@@ -132,12 +132,12 @@ class Response
     }
 
     /**
-     * Renders response
+     * Returns body or layout object
      * 
-     * @param   bool         $render_layout  Render layout or return View object
+     * @param   bool         $render  Render layout or return View object
      * @return  string|View
      */
-    public function render($render_layout = true)
+    public function body($render = false)
     {
         $controller_name  = ucfirst($this->application->name).'\\Controllers\\'.ucfirst($this->application->route->controller);
         $controller       = new $controller_name($this->application);
@@ -157,11 +157,16 @@ class Response
         $output = ob_get_contents();
         ob_end_clean();
 
-        if ( ! $render_layout)
-        {
-            return $controller->layout;
-        }
+        return $render ? $output : $controller->layout;
+    }
 
+    /**
+     * Renders response
+     * 
+     * @return  string|void
+     */
+    public function render()
+    {
         if ($this->application->config->use_sessions === true)
         {
             // set session parameters
@@ -193,7 +198,7 @@ class Response
 
         if ($this->application->request->method() !== 'HEAD')
         {
-            return $output;
+            return $this->body();
         }
     }
 
