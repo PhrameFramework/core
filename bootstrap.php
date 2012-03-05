@@ -22,9 +22,9 @@ class Bootstrap
      */
     public static function init($application = null)
     {
-        defined('APPLICATIONS_PATH')  or define('APPLICATIONS_PATH', __DIR__.'/../../applications');
-        defined('PACKAGES_PATH')      or define('PACKAGES_PATH', __DIR__.'/..');
-        defined('PUBLIC_PATH')        or define('PUBLIC_PATH', __DIR__.'/../../public');
+        defined('APPLICATIONS_PATH')  or define('APPLICATIONS_PATH', __DIR__.'/../../../applications');
+        defined('PACKAGES_PATH')      or define('PACKAGES_PATH', __DIR__.'/../..');
+        defined('PUBLIC_PATH')        or define('PUBLIC_PATH', __DIR__.'/../../../public');
         defined('APPLICATION_NAME')   or define('APPLICATION_NAME', getenv('APPLICATION_NAME') ?: 'main');
         defined('APPLICATION_ENV')    or define('APPLICATION_ENV', getenv('APPLICATION_ENV') ?: 'development');
 
