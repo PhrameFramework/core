@@ -132,12 +132,11 @@ class Response
     }
 
     /**
-     * Returns body or layout object
+     * Returns layout object
      * 
-     * @param   bool         $render  Render layout or return View object
-     * @return  string|View
+     * @return  View
      */
-    public function body($render = false)
+    public function body()
     {
         $controller_name  = ucfirst($this->application->name).'\\Controllers\\'.ucfirst($this->application->route->controller);
         $controller       = new $controller_name($this->application);
@@ -149,15 +148,16 @@ class Response
         {
             $controller->layout = new View('layout', array(), $this->application);
         }
-        call_user_func_array(array($controller, $action), $parameters);
-        if (method_exists($controller->layout, 'render'))
-        {
-            echo $controller->layout->render();
-        }
-        $output = ob_get_contents();
+        $output = call_user_func_array(array($controller, $action), $parameters);
         ob_end_clean();
 
-        return $render ? $output : $controller->layout;
+        // Any string data returned by the controller should be treated as a layout's content
+        if ( ! empty($output) and is_string($output))
+        {
+            $controller->layout->content = $output;
+        }
+
+        return $controller->layout;
     }
 
     /**
