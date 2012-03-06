@@ -77,7 +77,7 @@ class Application
         if (isset($_SERVER['HTTP_HOST']))
         {
             $base_url .= 'http';
-            if ((isset($_SERVER['HTTPS']) and $_SERVER['HTTPS'] != 'off') or ( ! isset($_SERVER['HTTPS']) and $_SERVER['SERVER_PORT'] == 443))
+            if ((isset($_SERVER['HTTPS']) and $_SERVER['HTTPS'] != 'off') or ( ! isset($_SERVER['HTTPS']) and isset($_SERVER['SERVER_PORT']) and $_SERVER['SERVER_PORT'] == 443))
             {
                 $base_url .= 's';
             }
