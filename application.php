@@ -26,35 +26,35 @@ class Application
      * 
      * @var  string
      */
-    public $name = '';
+    protected $name = '';
 
     /**
      * Application configuration
      * 
      * @var  Config
      */
-    public $config = null;
+    protected $config = null;
 
     /**
      * Request object
      * 
      * @var  Request
      */
-    public $request = null;
+    protected $request = null;
 
     /**
      * Route object
      * 
      * @var  Route
      */
-    public $route = null;
+    protected $route = null;
 
     /**
      * Response object
      * 
      * @var  Response
      */
-    public $response = null;
+    protected $response = null;
 
     /**
      * Application constructor (protected)
@@ -123,32 +123,48 @@ class Application
     }
 
     /**
-     * Process request
+     * Magic method for read-only properties
      * 
-     * @param   Request   $request  Request to process
-     * @return  Response
+     * @param   string  $name  Property name
+     * @return  mixed
      */
-    public function process($request = null)
+    public function __get($name)
     {
-        $this->request   = $request ?: new Request($this);
-        $this->route     = new Route($this);
-        $this->response  = new Response($this);
+        if (in_array($name, array('name', 'config', 'request', 'route', 'response')))
+        {
+            if ($name === 'response' and ! isset($this->response))
+            {
+                $this->response = $this->response();
+            }
 
-        return $this->response;
+            return $this->$name;
+        }
+        else
+        {
+            return null;
+        }
+
     }
 
     /**
-     * Process URI
+     * Process request (or provided uri) and returns response
      * 
      * @param   string  $uri  URI to process
      * @return  Response
      */
-    public function process_uri($uri)
+    public function response($uri = null)
     {
-        $request = new Request($this);
-        $request->server('request_uri', $uri);
+        $this->request   = new Request($this);
 
-        return $this->process($request);
+        if ( ! empty($uri))
+        {
+            $this->request->server('request_uri', $uri);
+        }
+
+        $this->route     = new Route($this);
+        $this->response  = new Response($this);
+
+        return $this->response;
     }
 
     /**
@@ -158,7 +174,7 @@ class Application
      */
     public function run()
     {
-        echo $this->process()->render();
+        echo $this->response()->render();
     }
 
 }
