@@ -74,7 +74,7 @@ class Application
 
         // set base_url
         $base_url = '';
-        if ($_SERVER['HTTP_HOST'])
+        if (isset($_SERVER['HTTP_HOST']))
         {
             $base_url .= 'http';
             if ((isset($_SERVER['HTTPS']) and $_SERVER['HTTPS'] != 'off') or ( ! isset($_SERVER['HTTPS']) and $_SERVER['SERVER_PORT'] == 443))
@@ -83,7 +83,7 @@ class Application
             }
             $base_url .= '://'.$_SERVER['HTTP_HOST'];
         }
-        if ($_SERVER['SCRIPT_NAME'])
+        if (isset($_SERVER['SCRIPT_NAME']))
         {
             $base_url .= rtrim(str_replace('\\', '/', dirname($_SERVER['SCRIPT_NAME'])), '/');
         }
