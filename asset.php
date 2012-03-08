@@ -29,13 +29,6 @@ class Asset
     protected $config = null;
 
     /**
-     * Asset directory prefix
-     * 
-     * @var  string
-     */
-    protected $prefix = '';
-
-    /**
      * Constructs Asset object
      * 
      * @param   Application  $application  Application object
@@ -45,7 +38,6 @@ class Asset
     {
         $this->application  = $application ?: Application::instance();
         $this->config       = new Config('asset', $this->application);
-        $this->prefix       = md5($this->application->name);
     }
 
     /**
@@ -59,8 +51,8 @@ class Asset
     public function render_asset($file_name, $asset_type, $attributes = array())
     {
         $theme_file   = APPLICATIONS_PATH.'/'.$this->application->name.'/themes/'.$this->application->config->theme.'/assets/'.$asset_type.'/'.$file_name;
-        $public_file  = PUBLIC_PATH.'/assets/'.$this->prefix.'/'.$asset_type.'/'.$file_name;
-        $public_url   = $this->application->config->base_url.'/assets/'.$this->prefix.'/'.$asset_type.'/'.$file_name;
+        $public_file  = PUBLIC_PATH.'/assets/'.$this->application->name.'/'.$asset_type.'/'.$file_name;
+        $public_url   = $this->application->config->base_url.'/assets/'.$this->application->name.'/'.$asset_type.'/'.$file_name;
 
         if ( ! is_file($public_file) or filemtime($public_file) != filemtime($theme_file))
         {
