@@ -16,9 +16,6 @@ defined('PUBLIC_PATH')        or define('PUBLIC_PATH', __DIR__.'/../../../../pub
 defined('APPLICATION_NAME')   or define('APPLICATION_NAME', getenv('APPLICATION_NAME') ?: 'main');
 defined('APPLICATION_ENV')    or define('APPLICATION_ENV', getenv('APPLICATION_ENV') ?: 'development');
 
-$_SERVER['HTTP_HOST']    = 'phrame.loc';
-$_SERVER['SCRIPT_NAME']  = '';
-
 /**
  * Registering autoloader
  */

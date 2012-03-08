@@ -28,19 +28,17 @@ class Application extends \PHPUnit_Framework_TestCase
 
     public function test_name()
     {
-        $this->assertTrue($this->application->name === APPLICATION_NAME);
-
+        $this->assertEquals($this->application->name, APPLICATION_NAME);
     }
 
     public function test_config()
     {
-        $this->assertTrue($this->application->config->base_url === 'http://phrame.loc');
-        $this->assertTrue($this->application->config->error_reporting === $this->config['error_reporting']);
-        $this->assertTrue($this->application->config->display_errors === $this->config['display_errors']);
-        $this->assertTrue($this->application->config->use_sessions === $this->config['use_sessions']);
-        $this->assertTrue($this->application->config->theme === $this->config['theme']);
-        $this->assertTrue($this->application->config->packages === $this->config['packages']);
-
+        $this->assertEquals($this->application->config->base_url,         'http://phrame.loc');
+        $this->assertEquals($this->application->config->error_reporting,  $this->config['error_reporting']);
+        $this->assertEquals($this->application->config->display_errors,   $this->config['display_errors']);
+        $this->assertEquals($this->application->config->use_sessions,     $this->config['use_sessions']);
+        $this->assertEquals($this->application->config->theme,            $this->config['theme']);
+        $this->assertEquals($this->application->config->packages,         $this->config['packages']);
     }
 
 }

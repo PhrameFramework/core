@@ -28,10 +28,13 @@ class Asset extends \PHPUnit_Framework_TestCase
 
     public function test_css()
     {
-        $this->assertTrue(preg_match(
-            "#<link type=\"text\/css\" rel=\"stylesheet\" href=\"http\:\/\/phrame.loc\/assets\/".md5($this->application->name)."\/css\/bootstrap.css\?[0-9]+\" \/>#",
-            $this->asset->css('bootstrap.css')
-        ) == 1);
+        $this->assertEquals(
+            preg_match(
+                "#<link type=\"text\/css\" rel=\"stylesheet\" href=\"http\:\/\/phrame.loc\/assets\/".md5($this->application->name)."\/css\/bootstrap.css\?[0-9]+\" \/>#",
+                $this->asset->css('bootstrap.css')
+            ),
+            1
+        );
     }
 
 }

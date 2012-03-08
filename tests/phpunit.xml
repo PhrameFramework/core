@@ -1,4 +1,8 @@
 <phpunit bootstrap="index.php" colors="true">
+    <php>
+        <server name="HTTP_HOST"    value="phrame.loc" />
+        <server name="SCRIPT_NAME"  value="" />
+    </php>
     <testsuite name="Core">
         <directory suffix=".php">.</directory>
     </testsuite>
