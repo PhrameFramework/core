@@ -55,7 +55,7 @@ class Model
      */
     public function __get($name)
     {
-        return isset($this->row[$name]) ? $this->row[$name] : null;
+        return isset(self::$data[$this->key][$name]) ? self::$data[$this->key][$name] : null;
     }
 
     /**
@@ -101,6 +101,7 @@ class Model
         if ($key !== false)
         {
             unset(self::$data[$key]);
+            unset($this);
         }
     }
 
