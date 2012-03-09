@@ -26,9 +26,17 @@ class Lang extends \PHPUnit_Framework_TestCase
         $this->lang         = new Core\Lang($this->application);
     }
 
+    /**
+     * Lang test
+     * 
+     * See config in sandbox/applications/main/config/lang.php
+     * 
+     * @return  void
+     */
     public function test_translation()
     {
         $this->assertEquals($this->lang->get('Home'), 'Главная');
+        $this->assertEquals($this->lang->get('Test'), 'Test');
     }
 
 }

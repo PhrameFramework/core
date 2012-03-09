@@ -29,6 +29,13 @@ class Config extends \PHPUnit_Framework_TestCase
         $this->config_array = include APPLICATIONS_PATH.'/'.APPLICATION_NAME.'/config/application.php';
     }
 
+    /**
+     * Config test
+     * 
+     * See config in sandbox/applications/main/config/application.php
+     * 
+     * @return  void
+     */
     public function test_config()
     {
         $this->assertEquals($this->config->error_reporting,  $this->config_array['error_reporting']);
