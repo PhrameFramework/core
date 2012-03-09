@@ -18,12 +18,9 @@ class Application extends \PHPUnit_Framework_TestCase
 {
     protected $application;
 
-    protected $config;
-
     public function setUp()
     {
-        $this->application  = Core\Application::instance();
-        $this->config       = include APPLICATIONS_PATH.'/'.APPLICATION_NAME.'/config/application.php';
+        $this->application = Core\Application::instance();
     }
 
     public function test_name()
@@ -31,14 +28,9 @@ class Application extends \PHPUnit_Framework_TestCase
         $this->assertEquals($this->application->name, APPLICATION_NAME);
     }
 
-    public function test_config()
+    public function test_base_url()
     {
-        $this->assertEquals($this->application->config->base_url,         'http://phrame.loc');
-        $this->assertEquals($this->application->config->error_reporting,  $this->config['error_reporting']);
-        $this->assertEquals($this->application->config->display_errors,   $this->config['display_errors']);
-        $this->assertEquals($this->application->config->use_sessions,     $this->config['use_sessions']);
-        $this->assertEquals($this->application->config->theme,            $this->config['theme']);
-        $this->assertEquals($this->application->config->packages,         $this->config['packages']);
+        $this->assertEquals($this->application->config->base_url, 'http://phrame.loc');
     }
 
 }
