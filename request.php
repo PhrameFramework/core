@@ -75,7 +75,7 @@ class Request
         $this->get      = ! empty($get)     ? $get     : $_GET;
         $this->post     = ! empty($post)    ? $post    : $_POST;
         $this->cookie   = ! empty($cookie)  ? $cookie  : $_COOKIE;
-        $this->session  = ! empty($session) ? $session : ($this->application->config->use_sessions === true ? $_SESSION : array());
+        $this->session  = ! empty($session) ? $session : (($this->application->config->use_sessions === true and isset($_SESSION)) ? $_SESSION : array());
     }
 
     /**
