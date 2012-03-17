@@ -138,7 +138,7 @@ class Response
      */
     public function body()
     {
-        $controller_name  = ucfirst($this->application->name).'\\Controllers\\'.ucfirst($this->application->route->controller);
+        $controller_name  = '\\'.ucfirst($this->application->name).'\\Controllers\\'.str_replace(' ', '\\', ucwords(str_replace('/', ' ', strtolower($this->application->route->controller))));
         $controller       = new $controller_name($this->application);
         $action           = $this->application->route->action;
         $parameters       = $this->application->route->parameters;

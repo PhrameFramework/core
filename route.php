@@ -75,14 +75,27 @@ class Route
 
         $path_info = explode('/', $request_uri);
 
-        $this->controller  = strtolower( ! empty($path_info[0]) ? $path_info[0] : $this->config->default_controller);
-        $this->action      = strtolower( ! empty($path_info[1]) ? $path_info[1] : $this->config->default_action);
+        $this->controller  = $request_uri ?: $this->config->default_controller;
+        $this->action      = $this->config->default_action;
+        $this->parameters  = array();
 
-        unset($path_info[0]);
-        unset($path_info[1]);
-        $this->parameters  = $path_info;
+        $routable = false;
 
-        $routable = is_file(APPLICATIONS_PATH.'/'.$this->application->name.'/controllers/'.$this->controller.'.php') && method_exists(ucfirst($this->application->name).'\\Controllers\\'.ucfirst($this->controller), $this->action);
+        while ( ! $routable and ! empty($this->controller))
+        {
+            $controller_class = '\\'.ucfirst($this->application->name).'\\Controllers\\'.str_replace(' ', '\\', ucwords(str_replace('/', ' ', strtolower($this->controller))));
+
+            $routable = is_file(APPLICATIONS_PATH.'/'.$this->application->name.'/controllers/'.$this->controller.'.php') && method_exists($controller_class, $this->action);
+
+            if ( ! $routable)
+            {
+                $path = explode('/', $this->controller);
+
+                $this->parameters  = array_merge_recursive(array($this->action), $this->parameters);
+                $this->action      = array_pop($path);
+                $this->controller  = implode('/', $path);
+            }
+        }
 
         if ( ! $routable)
         {
