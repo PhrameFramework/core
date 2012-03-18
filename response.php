@@ -167,6 +167,8 @@ class Response
      */
     public function render()
     {
+        $body = $this->body();
+
         if ($this->application->config->use_sessions === true)
         {
             // set session parameters
@@ -198,7 +200,7 @@ class Response
 
         if ($this->application->request->method() !== 'HEAD')
         {
-            return $this->body();
+            return $body;
         }
     }
 
