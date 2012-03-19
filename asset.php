@@ -51,8 +51,8 @@ class Asset
     public function render_asset($file_name, $asset_type, $attributes = array())
     {
         $theme_file   = APPLICATIONS_PATH.'/'.$this->application->name.'/themes/'.$this->application->config->theme.'/assets/'.$asset_type.'/'.$file_name;
-        $public_file  = PUBLIC_PATH.'/assets/'.$this->application->name.'/'.$asset_type.'/'.$file_name;
-        $public_url   = $this->application->config->base_url.'/assets/'.$this->application->name.'/'.$asset_type.'/'.$file_name;
+        $public_file  = PUBLIC_PATH.'/assets/'.$this->application->name.'-'.$this->application->config->theme.'/'.$asset_type.'/'.$file_name;
+        $public_url   = $this->application->config->base_url.'/assets/'.$this->application->name.'-'.$this->application->config->theme.'/'.$asset_type.'/'.$file_name;
 
         if ( ! is_file($public_file) or filemtime($public_file) != filemtime($theme_file))
         {
