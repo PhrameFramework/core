@@ -73,8 +73,6 @@ class Route
             }
         }
 
-        $path_info = explode('/', $request_uri);
-
         $this->controller  = $request_uri ?: $this->config->default_controller;
         $this->action      = $this->config->default_action;
         $this->parameters  = array();
