@@ -197,7 +197,7 @@ class Response
      */
     public function render()
     {
-        $body = $this->body();
+        $body = $this->body ?: $this->body();
 
         if ($this->application->config->use_sessions === true)
         {
