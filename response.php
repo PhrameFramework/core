@@ -50,6 +50,13 @@ class Response
     protected $session = array();
 
     /**
+     * Layout object
+     * 
+     * @var  View
+     */
+    protected $body = null;
+
+    /**
      * Constructs Response object
      * 
      * @param   Application  $application  Application object
@@ -59,6 +66,29 @@ class Response
     {
         $this->application  = $application ?: Application::instance();
         $this->session      = $this->application->request->session();
+    }
+
+    /**
+     * Magic method for read-only properties
+     * 
+     * @param   string  $name  Property name
+     * @return  mixed
+     */
+    public function __get($name)
+    {
+        if (in_array($name, array('body')))
+        {
+            if ($name === 'body' and ! isset($this->body))
+            {
+                $this->body = $this->body();
+            }
+
+            return $this->$name;
+        }
+        else
+        {
+            return null;
+        }
     }
 
     /**

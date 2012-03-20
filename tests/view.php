@@ -40,7 +40,7 @@ class View extends \PHPUnit_Framework_TestCase
 
     public function test_layout()
     {
-        $this->assertEquals($this->application->response('about')->body()->render(), '<html><body>About Phrame</body></html>');
+        $this->assertEquals($this->application->response('about')->body->render(), '<html><body>About Phrame</body></html>');
     }
 
 }
