@@ -40,6 +40,17 @@ class Error
      */
     public function exception_handler($exception)
     {
+        if (isset($this->application->log))
+        {
+            $log_message = 'type: '.get_class($exception).'. ';
+            $log_message .= 'code: '.$exception->getCode().'. ';
+            $log_message .= 'message: '.$exception->getMessage().'. ';
+            $log_message .= 'file: '.$exception->getFile().'. ';
+            $log_message .= 'line: '.$exception->getLine();
+
+            $this->application->log->write($log_message);
+        }
+
         $view = new View(
             'errors/exception',
             array(
@@ -67,6 +78,16 @@ class Error
      */
     public function error_handler($errno, $errstr, $errfile, $errline)
     {
+        if (isset($this->application->log))
+        {
+            $log_message = 'code: '.$errno.'. ';
+            $log_message .= 'message: '.$errstr.'. ';
+            $log_message .= 'file: '.$errfile.'. ';
+            $log_message .= 'line: '.$errline;
+
+            $this->application->log->write($log_message);
+        }
+
         if (error_reporting() & $errno)
         {
             $view = new View(

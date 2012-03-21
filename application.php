@@ -36,6 +36,20 @@ class Application
     protected $config = null;
 
     /**
+     * Error object
+     * 
+     * @var  Error
+     */
+    protected $error = null;
+
+    /**
+     * Log object
+     * 
+     * @var  Log
+     */
+    protected $log = null;
+
+    /**
      * Request object
      * 
      * @var  Request
@@ -94,6 +108,14 @@ class Application
         {
             error_reporting($this->config->error_reporting);
             ini_set('display_errors', $this->config->display_errors);
+
+            // error and exception handler
+            $this->error   = new Error($this);
+            set_error_handler(array($this->error, 'error_handler'));
+            set_exception_handler(array($this->error, 'exception_handler'));
+
+            // logger
+            $this->log     = new Log($this);
         }
 
         // Load packages
@@ -130,7 +152,7 @@ class Application
      */
     public function __get($name)
     {
-        if (in_array($name, array('name', 'config', 'request', 'route', 'response')))
+        if (in_array($name, array('name', 'config', 'request', 'route', 'response', 'error', 'log')))
         {
             if ($name === 'response' and ! isset($this->response))
             {

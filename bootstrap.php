@@ -30,10 +30,6 @@ class Bootstrap
 
         $application = $application ?: Application::instance();
 
-        $error = new Error($application);
-        set_exception_handler(array($error, 'exception_handler'));
-        set_error_handler(array($error, 'error_handler'));
-
         $application->run();
     }
 
