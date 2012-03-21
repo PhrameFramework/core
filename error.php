@@ -15,12 +15,30 @@ namespace Phrame\Core;
 class Error
 {
     /**
+     * Application object
+     * 
+     * @var  Application
+     */
+    protected $application = null;
+
+    /**
+     * Constructs Error object
+     * 
+     * @param   Application  $application  Application object
+     * @return  void
+     */    
+    public function __construct($application = null)
+    {
+        $this->application  = $application ?: Application::instance();
+    }
+
+    /**
      * Exception handler
      * 
      * @param   Exception  $exception  Exception to handle
      * @return  void
      */
-    public static function exception_handler($exception)
+    public function exception_handler($exception)
     {
         $view = new View(
             'errors/exception',
@@ -31,14 +49,15 @@ class Error
                 'file'     => $exception->getFile(),
                 'line'     => $exception->getLine(),
                 'trace'    => $exception->getTrace()
-            )
+            ),
+            $this->application
         );
 
         echo $view;
     }
 
     /**
-     * Exception handler
+     * Error handler
      * 
      * @param   int     $errno    Level of the error
      * @param   string  $errstr   Error message
@@ -46,7 +65,7 @@ class Error
      * @param   int     $errline  Line number the error was raised at
      * @return  void
      */
-    public static function error_handler($errno, $errstr, $errfile, $errline)
+    public function error_handler($errno, $errstr, $errfile, $errline)
     {
         if (error_reporting() & $errno)
         {
@@ -57,7 +76,8 @@ class Error
                     'message'  => $errstr,
                     'file'     => $errfile,
                     'line'     => $errline
-                )
+                ),
+                $this->application
             );
 
             echo $view;
