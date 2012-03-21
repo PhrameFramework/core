@@ -112,7 +112,7 @@ class View
             include APPLICATIONS_PATH.'/'.$this->application->name.'/themes/'.$this->application->config->theme.'/'.$this->view_name.'.php';
         }
         // checking system theme
-        if (is_file(APPLICATIONS_PATH.'/'.$this->application->name.'/themes/system/'.$this->view_name.'.php'))
+        elseif (is_file(APPLICATIONS_PATH.'/'.$this->application->name.'/themes/system/'.$this->view_name.'.php'))
         {
             include APPLICATIONS_PATH.'/'.$this->application->name.'/themes/system/'.$this->view_name.'.php';
         }
