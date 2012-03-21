@@ -46,7 +46,7 @@ class Controller
      */
     public function error_404()
     {
-        $this->layout->content = '404 Not Found';
+        $this->layout->content = new View('404');
     }
 
     /**
