@@ -159,6 +159,7 @@ class Response
     public function redirect($url)
     {
         header('Location: '.$url, true, 302);
+        exit(0);
     }
 
     /**
