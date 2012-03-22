@@ -19,7 +19,7 @@ class Request
      * 
      * @var  Application
      */
-    protected $application = null;
+    protected $app = null;
 
     /**
      * Server parameters
@@ -59,23 +59,23 @@ class Request
     /**
      * Constructs Request object
      * 
-     * @param   Application  $application  Application object
-     * @param   array        $server       Server parameters
-     * @param   array        $get          Get parameters
-     * @param   array        $post         Post parameters
-     * @param   array        $cookie       Cookie parameters
-     * @param   array        $session      Session parameters
+     * @param   Application  $app      Application object
+     * @param   array        $server   Server parameters
+     * @param   array        $get      Get parameters
+     * @param   array        $post     Post parameters
+     * @param   array        $cookie   Cookie parameters
+     * @param   array        $session  Session parameters
      * @return  void
      */
-    public function __construct($application = null, $server = array(), $get = array(), $post = array(), $cookie = array(), $session = array())
+    public function __construct($app = null, $server = array(), $get = array(), $post = array(), $cookie = array(), $session = array())
     {
-        $this->application = $application ?: Application::instance();
+        $this->app = $app ?: Application::instance();
 
         $this->server   = ! empty($server)  ? $server  : $_SERVER;
         $this->get      = ! empty($get)     ? $get     : $_GET;
         $this->post     = ! empty($post)    ? $post    : $_POST;
         $this->cookie   = ! empty($cookie)  ? $cookie  : $_COOKIE;
-        $this->session  = ! empty($session) ? $session : (($this->application->config->use_sessions === true and isset($_SESSION)) ? $_SESSION : array());
+        $this->session  = ! empty($session) ? $session : (($this->app->config->use_sessions === true and isset($_SESSION)) ? $_SESSION : array());
     }
 
     /**

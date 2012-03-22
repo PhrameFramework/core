@@ -19,7 +19,7 @@ class Asset
      * 
      * @var  Application
      */
-    protected $application = null;
+    protected $app = null;
 
     /**
      * Asset configuration
@@ -31,13 +31,13 @@ class Asset
     /**
      * Constructs Asset object
      * 
-     * @param   Application  $application  Application object
+     * @param   Application  $app  Application object
      * @return  void
      */    
-    public function __construct($application = null)
+    public function __construct($app = null)
     {
-        $this->application  = $application ?: Application::instance();
-        $this->config       = new Config('asset', $this->application);
+        $this->app     = $app ?: Application::instance();
+        $this->config  = new Config('asset', $this->app);
     }
 
     /**
@@ -50,9 +50,9 @@ class Asset
      */
     public function render_asset($file_name, $asset_type, $attributes = array())
     {
-        $theme_file   = APPLICATIONS_PATH.'/'.$this->application->name.'/themes/'.$this->application->config->theme.'/assets/'.$asset_type.'/'.$file_name;
-        $public_file  = PUBLIC_PATH.'/assets/'.$this->application->name.'-'.$this->application->config->theme.'/'.$asset_type.'/'.$file_name;
-        $public_url   = $this->application->config->base_url.'/assets/'.$this->application->name.'-'.$this->application->config->theme.'/'.$asset_type.'/'.$file_name;
+        $theme_file   = APPLICATIONS_PATH.'/'.$this->app->name.'/themes/'.$this->app->config->theme.'/assets/'.$asset_type.'/'.$file_name;
+        $public_file  = PUBLIC_PATH.'/assets/'.$this->app->name.'-'.$this->app->config->theme.'/'.$asset_type.'/'.$file_name;
+        $public_url   = $this->app->config->base_url.'/assets/'.$this->app->name.'-'.$this->app->config->theme.'/'.$asset_type.'/'.$file_name;
 
         if ( ! is_file($public_file) or filemtime($public_file) != filemtime($theme_file))
         {

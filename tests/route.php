@@ -16,21 +16,21 @@ use Phrame\Core;
 
 class Route extends \PHPUnit_Framework_TestCase
 {
-    protected $application;
+    protected $app;
 
     public function setUp()
     {
-        $this->application  = Core\Application::instance();
+        $this->app  = Core\Application::instance();
     }
 
     public function test_default_route()
     {
         // generate response
-        $this->application->response();
+        $this->app->response();
 
         // check routes
-        $this->assertEquals($this->application->route->controller, 'home');
-        $this->assertEquals($this->application->route->action, 'index');
+        $this->assertEquals($this->app->route->controller, 'home');
+        $this->assertEquals($this->app->route->action, 'index');
     }
 
     /**
@@ -43,21 +43,21 @@ class Route extends \PHPUnit_Framework_TestCase
     public function test_custom_route()
     {
         // generate response
-        $this->application->response('main');
+        $this->app->response('main');
 
         // check routes
-        $this->assertEquals($this->application->route->controller, 'home');
-        $this->assertEquals($this->application->route->action, 'index');
+        $this->assertEquals($this->app->route->controller, 'home');
+        $this->assertEquals($this->app->route->action, 'index');
     }
 
     public function test_unroutable_route()
     {
         // generate response
-        $this->application->response('404');
+        $this->app->response('404');
 
         // check routes
-        $this->assertEquals($this->application->route->controller, 'home');
-        $this->assertEquals($this->application->route->action, '');
+        $this->assertEquals($this->app->route->controller, 'home');
+        $this->assertEquals($this->app->route->action, '');
     }
 
 }

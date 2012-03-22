@@ -16,16 +16,16 @@ use Phrame\Core;
 
 class Response extends \PHPUnit_Framework_TestCase
 {
-    protected $application;
+    protected $app;
 
     public function setUp()
     {
-        $this->application  = Core\Application::instance();
+        $this->app  = Core\Application::instance();
     }
 
     public function test_body()
     {
-        $this->assertEquals($this->application->response('/')->body->content, 'Hello, world');
+        $this->assertEquals($this->app->response('/')->body->content, 'Hello, world');
     }
 
 }

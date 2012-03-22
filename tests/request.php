@@ -16,7 +16,7 @@ use Phrame\Core;
 
 class Request extends \PHPUnit_Framework_TestCase
 {
-    protected $application;
+    protected $app;
 
     protected $request;
 
@@ -31,11 +31,11 @@ class Request extends \PHPUnit_Framework_TestCase
         $_COOKIE['test']   = 'cookie_test';
         $_SESSION['test']  = 'session_test';
 
-        $this->application  = Core\Application::instance();
+        $this->app      = Core\Application::instance();
 
-        $this->application->config->use_sessions = true;
+        $this->app->config->use_sessions = true;
         
-        $this->request      = new Core\Request($this->application);
+        $this->request  = new Core\Request($this->app);
     }
 
     public function test_escape()

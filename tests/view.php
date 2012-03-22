@@ -16,14 +16,14 @@ use Phrame\Core;
 
 class View extends \PHPUnit_Framework_TestCase
 {
-    protected $application;
+    protected $app;
 
     protected $view;
 
     public function setUp()
     {
-        $this->application  = Core\Application::instance();
-        $this->view         = new Core\View('home', array(), $this->application);
+        $this->app   = Core\Application::instance();
+        $this->view  = new Core\View('home', array(), $this->app);
     }
 
     public function test_data()
@@ -40,7 +40,7 @@ class View extends \PHPUnit_Framework_TestCase
 
     public function test_layout()
     {
-        $this->assertEquals($this->application->response('about')->body->render(), '<html><body>About Phrame</body></html>');
+        $this->assertEquals($this->app->response('about')->body->render(), '<html><body>About Phrame</body></html>');
     }
 
 }

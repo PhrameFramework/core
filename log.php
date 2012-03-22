@@ -19,7 +19,7 @@ class Log
      * 
      * @var  Application
      */
-    protected $application = null;
+    protected $app = null;
 
     /**
      * Logfile name
@@ -31,14 +31,14 @@ class Log
     /**
      * Constructs Log object
      * 
-     * @param   Application  $application  Application object
+     * @param   Application  $app  Application object
      * @return  void
      */    
-    public function __construct($application = null)
+    public function __construct($app = null)
     {
-        $this->application  = $application ?: Application::instance();
+        $this->app  = $app ?: Application::instance();
 
-        $dir_name  = APPLICATIONS_PATH.'/'.$this->application->name.'/logs/';
+        $dir_name  = APPLICATIONS_PATH.'/'.$this->app->name.'/logs/';
 
         if ( ! is_dir($dir_name))
         {

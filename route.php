@@ -19,7 +19,7 @@ class Route
      * 
      * @var  Application
      */
-    protected $application = null;
+    protected $app = null;
 
     /**
      * Controller
@@ -52,16 +52,16 @@ class Route
     /**
      * Creates Route object
      * 
-     * @param   Application  $application  Application object
+     * @param   Application  $app  Application object
      * @return  void
      */
-    public function __construct($application = null)
+    public function __construct($app = null)
     {
-        $this->application  = $application ?: Application::instance();
-        $this->config       = new Config('route', $this->application);
+        $this->app     = $app ?: Application::instance();
+        $this->config  = new Config('route', $this->app);
 
         // Process request_uri
-        $request_uri = trim($this->application->request->server('request_uri'), '/');
+        $request_uri = trim($this->app->request->server('request_uri'), '/');
 
         // use regexp to choose the appropriate route
         foreach ($this->config->routes as $old_route => $new_route)
@@ -81,9 +81,9 @@ class Route
 
         while ( ! $routable and ! empty($this->controller))
         {
-            $controller_class = '\\'.ucfirst($this->application->name).'\\Controllers\\'.str_replace(' ', '\\', ucwords(str_replace('/', ' ', strtolower($this->controller))));
+            $controller_class = '\\'.ucfirst($this->app->name).'\\Controllers\\'.str_replace(' ', '\\', ucwords(str_replace('/', ' ', strtolower($this->controller))));
 
-            $routable = is_file(APPLICATIONS_PATH.'/'.$this->application->name.'/controllers/'.$this->controller.'.php') && method_exists($controller_class, $this->action);
+            $routable = is_file(APPLICATIONS_PATH.'/'.$this->app->name.'/controllers/'.$this->controller.'.php') && method_exists($controller_class, $this->action);
 
             if ( ! $routable)
             {

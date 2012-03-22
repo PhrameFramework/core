@@ -17,10 +17,10 @@ class Bootstrap
     /**
      * Loads and initializes package
      * 
-     * @param   Core\Application  $application  Application object
+     * @param   Core\Application  $app  Application object
      * @return  void
      */
-    public static function init($application = null)
+    public static function init($app = null)
     {
         defined('APPLICATIONS_PATH')  or define('APPLICATIONS_PATH', __DIR__.'/../../../applications');
         defined('PACKAGES_PATH')      or define('PACKAGES_PATH', __DIR__.'/../..');
@@ -28,9 +28,9 @@ class Bootstrap
         defined('APPLICATION_NAME')   or define('APPLICATION_NAME', getenv('APPLICATION_NAME') ?: 'main');
         defined('APPLICATION_ENV')    or define('APPLICATION_ENV', getenv('APPLICATION_ENV') ?: 'development');
 
-        $application = $application ?: Application::instance();
+        $app = $app ?: Application::instance();
 
-        $application->run();
+        $app->run();
     }
 
 }

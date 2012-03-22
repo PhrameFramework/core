@@ -19,7 +19,7 @@ class Response
      * 
      * @var  Application
      */
-    protected $application = null;
+    protected $app = null;
 
     /**
      * Reaponse status code
@@ -59,13 +59,13 @@ class Response
     /**
      * Constructs Response object
      * 
-     * @param   Application  $application  Application object
+     * @param   Application  $app  Application object
      * @return  void
      */
-    public function __construct($application = null)
+    public function __construct($app = null)
     {
-        $this->application  = $application ?: Application::instance();
-        $this->session      = $this->application->request->session();
+        $this->app      = $app ?: Application::instance();
+        $this->session  = $this->app->request->session();
     }
 
     /**
@@ -132,7 +132,7 @@ class Response
             'value'     => $value,
             'expire'    => $expire   ?: time() + 60 * 60,
             'path'      => $path     ?: '/',
-            'domain'    => $domain   ?: parse_url($this->application->config->base_url, PHP_URL_HOST),
+            'domain'    => $domain   ?: null,
             'secure'    => $secure   ?: false,
             'httponly'  => $httponly ?: false,
         );
@@ -169,15 +169,15 @@ class Response
      */
     public function body()
     {
-        $controller_class  = '\\'.ucfirst($this->application->name).'\\Controllers\\'.str_replace(' ', '\\', ucwords(str_replace('/', ' ', strtolower($this->application->route->controller))));
-        $controller        = new $controller_class($this->application);
-        $action            = $this->application->route->action;
-        $parameters        = $this->application->route->parameters;
+        $controller_class  = '\\'.ucfirst($this->app->name).'\\Controllers\\'.str_replace(' ', '\\', ucwords(str_replace('/', ' ', strtolower($this->app->route->controller))));
+        $controller        = new $controller_class($this->app);
+        $action            = $this->app->route->action;
+        $parameters        = $this->app->route->parameters;
 
         ob_start();
         if ( ! isset($controller->layout))
         {
-            $controller->layout = new View('layout', array(), $this->application);
+            $controller->layout = new View('layout', array(), $this->app);
         }
         $output = call_user_func_array(array($controller, $action), $parameters);
         ob_end_clean();
@@ -200,7 +200,7 @@ class Response
     {
         $body = $this->body ?: $this->body();
 
-        if ($this->application->config->use_sessions === true)
+        if ($this->app->config->use_sessions === true)
         {
             // set session parameters
             $_SESSION = $this->session;
@@ -229,7 +229,7 @@ class Response
             header($header, false);
         }
 
-        if ($this->application->request->method() !== 'HEAD')
+        if ($this->app->request->method() !== 'HEAD')
         {
             return $body;
         }

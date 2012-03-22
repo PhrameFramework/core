@@ -16,21 +16,21 @@ use Phrame\Core;
 
 class Asset extends \PHPUnit_Framework_TestCase
 {
-    protected $application;
+    protected $app;
 
     protected $asset;
 
     public function setUp()
     {
-        $this->application  = Core\Application::instance();
-        $this->asset        = new Core\Asset($this->application);
+        $this->app    = Core\Application::instance();
+        $this->asset  = new Core\Asset($this->app);
     }
 
     public function test_css()
     {
         $this->assertEquals(
             preg_match(
-                "#<link type=\"text\/css\" rel=\"stylesheet\" href=\"http\:\/\/phrame.loc\/assets\/".$this->application->name.'-'.$this->application->config->theme."\/css\/bootstrap.css\?[0-9]+\" \/>#",
+                "#<link type=\"text\/css\" rel=\"stylesheet\" href=\"http\:\/\/phrame.loc\/assets\/".$this->app->name.'-'.$this->app->config->theme."\/css\/bootstrap.css\?[0-9]+\" \/>#",
                 $this->asset->css('bootstrap.css')
             ),
             1

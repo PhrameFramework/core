@@ -19,17 +19,17 @@ class Error
      * 
      * @var  Application
      */
-    protected $application = null;
+    protected $app = null;
 
     /**
      * Constructs Error object
      * 
-     * @param   Application  $application  Application object
+     * @param   Application  $app  Application object
      * @return  void
      */    
-    public function __construct($application = null)
+    public function __construct($app = null)
     {
-        $this->application  = $application ?: Application::instance();
+        $this->app  = $app ?: Application::instance();
     }
 
     /**
@@ -40,7 +40,7 @@ class Error
      */
     public function exception_handler($exception)
     {
-        if (isset($this->application->log))
+        if (isset($this->app->log))
         {
             $log_message = 'type: '.get_class($exception).'. ';
             $log_message .= 'code: '.$exception->getCode().'. ';
@@ -48,7 +48,7 @@ class Error
             $log_message .= 'file: '.$exception->getFile().'. ';
             $log_message .= 'line: '.$exception->getLine();
 
-            $this->application->log->write($log_message);
+            $this->app->log->write($log_message);
         }
 
         $view = new View(
@@ -61,7 +61,7 @@ class Error
                 'line'     => $exception->getLine(),
                 'trace'    => $exception->getTrace()
             ),
-            $this->application
+            $this->app
         );
 
         echo $view;
@@ -78,14 +78,14 @@ class Error
      */
     public function error_handler($errno, $errstr, $errfile, $errline)
     {
-        if (isset($this->application->log))
+        if (isset($this->app->log))
         {
             $log_message = 'code: '.$errno.'. ';
             $log_message .= 'message: '.$errstr.'. ';
             $log_message .= 'file: '.$errfile.'. ';
             $log_message .= 'line: '.$errline;
 
-            $this->application->log->write($log_message);
+            $this->app->log->write($log_message);
         }
 
         if (error_reporting() & $errno)
@@ -98,7 +98,7 @@ class Error
                     'file'     => $errfile,
                     'line'     => $errline
                 ),
-                $this->application
+                $this->app
             );
 
             echo $view;

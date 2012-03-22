@@ -16,21 +16,21 @@ use Phrame\Core;
 
 class Application extends \PHPUnit_Framework_TestCase
 {
-    protected $application;
+    protected $app;
 
     public function setUp()
     {
-        $this->application = Core\Application::instance();
+        $this->app = Core\Application::instance();
     }
 
     public function test_name()
     {
-        $this->assertEquals($this->application->name, APPLICATION_NAME);
+        $this->assertEquals($this->app->name, APPLICATION_NAME);
     }
 
     public function test_base_url()
     {
-        $this->assertEquals($this->application->config->base_url, 'http://phrame.loc');
+        $this->assertEquals($this->app->config->base_url, 'http://phrame.loc');
     }
 
 }

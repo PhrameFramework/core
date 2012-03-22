@@ -16,14 +16,14 @@ use Phrame\Core;
 
 class Lang extends \PHPUnit_Framework_TestCase
 {
-    protected $application;
+    protected $app;
 
     protected $lang;
 
     public function setUp()
     {
-        $this->application  = Core\Application::instance();
-        $this->lang         = new Core\Lang($this->application);
+        $this->app   = Core\Application::instance();
+        $this->lang  = new Core\Lang($this->app);
     }
 
     /**

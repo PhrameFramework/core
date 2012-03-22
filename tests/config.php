@@ -16,7 +16,7 @@ use Phrame\Core;
 
 class Config extends \PHPUnit_Framework_TestCase
 {
-    protected $application;
+    protected $app;
 
     protected $config;
 
@@ -24,8 +24,8 @@ class Config extends \PHPUnit_Framework_TestCase
 
     public function setUp()
     {
-        $this->application  = Core\Application::instance();
-        $this->config       = new Core\Config('application', $this->application);
+        $this->app          = Core\Application::instance();
+        $this->config       = new Core\Config('application', $this->app);
         $this->config_array = include APPLICATIONS_PATH.'/'.APPLICATION_NAME.'/config/application.php';
     }
 

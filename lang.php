@@ -19,7 +19,7 @@ class Lang
      * 
      * @var  Application
      */
-    protected $application = null;
+    protected $app = null;
 
     /**
      * Lang configuration
@@ -59,13 +59,13 @@ class Lang
     /**
      * Constructs Lang object
      * 
-     * @param   Application  $application  Application object
+     * @param   Application  $app  Application object
      * @return  void
      */    
-    public function __construct($application = null)
+    public function __construct($app = null)
     {
-        $this->application  = $application ?: Application::instance();
-        $this->config       = new Config('lang', $this->application);
+        $this->app     = $app ?: Application::instance();
+        $this->config  = new Config('lang', $this->app);
 
         $this->language              = $this->config->language === 'auto' ? strtolower(substr($_SERVER["HTTP_ACCEPT_LANGUAGE"], 0, 2)) : $this->config->language;
         $this->default_language      = $this->config->default_language;

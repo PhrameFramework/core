@@ -19,7 +19,7 @@ class Controller
      * 
      * @var  Application
      */
-    protected $application = null;
+    protected $app = null;
 
     /**
      * Layout view object
@@ -31,12 +31,12 @@ class Controller
     /**
      * Constructs Controller object
      * 
-     * @param   Application  $application  Application object
+     * @param   Application  $app  Application object
      * @return  void
      */
-    public function __construct($application = null)
+    public function __construct($app = null)
     {
-        $this->application = $application ?: Application::instance();
+        $this->app = $app ?: Application::instance();
     }
 
     /**
@@ -58,7 +58,7 @@ class Controller
      */
     public function __call($method, $parameters)
     {
-        $this->application->response->status(404);
+        $this->app->response->status(404);
 
         $this->error_404();
     }
