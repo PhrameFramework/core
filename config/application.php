@@ -5,8 +5,9 @@ return array(
     /**
      * Error reporting settings
      */
-    'error_reporting'  => -1,
-    'display_errors'   => 1,
+    'error_reporting'    => -1,
+    'display_errors'     => 1,
+    'display_exceptions' => 1,
 
     /**
      * Use php sessions

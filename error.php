@@ -51,20 +51,23 @@ class Error
             $this->app->log->write($log_message);
         }
 
-        $view = new View(
-            'errors/exception',
-            array(
-                'type'     => get_class($exception),
-                'code'     => $exception->getCode(),
-                'message'  => $exception->getMessage(),
-                'file'     => $exception->getFile(),
-                'line'     => $exception->getLine(),
-                'trace'    => $exception->getTrace()
-            ),
-            $this->app
-        );
+        if ($this->app->config->display_exceptions)
+        {
+            $view = new View(
+                'errors/exception',
+                array(
+                    'type'     => get_class($exception),
+                    'code'     => $exception->getCode(),
+                    'message'  => $exception->getMessage(),
+                    'file'     => $exception->getFile(),
+                    'line'     => $exception->getLine(),
+                    'trace'    => $exception->getTrace()
+                ),
+                $this->app
+            );
 
-        echo $view;
+            echo $view;
+        }
     }
 
     /**
