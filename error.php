@@ -3,7 +3,7 @@
  * Part of the Phrame
  *
  * @package    Core
- * @version    0.3.0
+ * @version    0.4.0
  * @author     Phrame Development Team
  * @license    MIT License
  * @copyright  2012 Phrame Development Team
@@ -35,7 +35,7 @@ class Error
     /**
      * Exception handler
      * 
-     * @param   Exception  $exception  Exception to handle
+     * @param   \Exception  $exception  Exception to handle
      * @return  void
      */
     public function exception_handler($exception)

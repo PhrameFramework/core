@@ -3,7 +3,7 @@
  * Part of the Phrame
  *
  * @package    Core
- * @version    0.3.0
+ * @version    0.4.0
  * @author     Phrame Development Team
  * @license    MIT License
  * @copyright  2012 Phrame Development Team
@@ -41,8 +41,8 @@ class Request extends \PHPUnit_Framework_TestCase
     public function test_escape()
     {
         $this->assertEquals(
-            $this->request->escape('<script type="text/javascript>alert("1")</script>"'),
-            '&lt;script type=&quot;text/javascript&gt;alert(&quot;1&quot;)&lt;/script&gt;&quot;'
+            $this->request->escape('<script type="text/javascript>alert("1")</script>'),
+            '&lt;script type=&quot;text/javascript&gt;alert(&quot;1&quot;)&lt;/script&gt;'
         );
     }
 

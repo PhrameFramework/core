@@ -3,7 +3,7 @@
  * Part of the Phrame
  *
  * @package    Core
- * @version    0.3.0
+ * @version    0.4.0
  * @author     Phrame Development Team
  * @license    MIT License
  * @copyright  2012 Phrame Development Team
@@ -22,7 +22,7 @@ class Response
     protected $app = null;
 
     /**
-     * Reaponse status code
+     * Response status code
      * 
      * @var  int
      */
