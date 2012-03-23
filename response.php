@@ -174,13 +174,21 @@ class Response
         $action            = $this->app->route->action;
         $parameters        = $this->app->route->parameters;
 
-        ob_start();
+        if (APPLICATION_ENV === 'production')
+        {
+            ob_start();
+        }
+
         if ( ! isset($controller->layout))
         {
             $controller->layout = new View('layout', array(), $this->app);
         }
         $output = call_user_func_array(array($controller, $action), $parameters);
-        ob_end_clean();
+
+        if (APPLICATION_ENV === 'production')
+        {
+            ob_end_clean();
+        }
 
         // Any string data returned by the controller should be treated as a layout's content
         if ( ! empty($output) and is_string($output))
