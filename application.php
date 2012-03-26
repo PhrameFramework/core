@@ -36,20 +36,6 @@ class Application
     protected $config = null;
 
     /**
-     * Error object
-     * 
-     * @var  Error
-     */
-    protected $error = null;
-
-    /**
-     * Log object
-     * 
-     * @var  Log
-     */
-    protected $log = null;
-
-    /**
      * Request object
      * 
      * @var  Request
@@ -69,6 +55,34 @@ class Application
      * @var  Response
      */
     protected $response = null;
+
+    /**
+     * Asset object
+     * 
+     * @var  Asset
+     */
+    protected $asset = null;
+
+    /**
+     * Lang object
+     * 
+     * @var  Lang
+     */
+    protected $lang = null;
+
+    /**
+     * Error object
+     * 
+     * @var  Error
+     */
+    protected $error = null;
+
+    /**
+     * Log object
+     * 
+     * @var  Log
+     */
+    protected $log = null;
 
     /**
      * Application constructor (protected)
@@ -124,6 +138,9 @@ class Application
             // Call package's init (\Phrame\Activerecord\Bootstrap::init($this) for example)
             call_user_func('\\'.str_replace(' ', '\\', ucwords(str_replace('/', ' ', strtolower($package)))).'\\Bootstrap::init', $this);
         }
+
+        $this->asset  = new Asset($this);
+        $this->lang   = new Lang($this);
     }
 
     /**
@@ -152,7 +169,7 @@ class Application
      */
     public function __get($name)
     {
-        if (in_array($name, array('name', 'config', 'request', 'route', 'response', 'error', 'log')))
+        if (in_array($name, array('name', 'config', 'request', 'route', 'response', 'asset', 'lang', 'error', 'log')))
         {
             if ($name === 'response' and ! isset($this->response))
             {
