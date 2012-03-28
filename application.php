@@ -86,7 +86,7 @@ class Application
     public function __construct($name = '')
     {
         $this->name    = $name ?: APPLICATION_NAME;
-        $this->config  = new Config('application', $this);
+        $this->config  = new Config('application', $this->name);
 
         if ($this->config->use_sessions === true)
         {

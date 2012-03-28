@@ -16,16 +16,13 @@ use Phrame\Core;
 
 class Config extends \PHPUnit_Framework_TestCase
 {
-    protected $app;
-
     protected $config;
 
     protected $config_array;
 
     public function setUp()
     {
-        $this->app          = Core\Applications::instance();
-        $this->config       = new Core\Config('application', $this->app);
+        $this->config       = new Core\Config('application');
         $this->config_array = include APPLICATIONS_PATH.'/'.APPLICATION_NAME.'/config/application.php';
     }
 
