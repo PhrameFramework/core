@@ -47,7 +47,7 @@ class View
     {
         $this->view_name  = $view_name;
         $this->data       = $data;
-        $this->app        = $app ?: Application::instance();
+        $this->app        = $app ?: Applications::instance();
     }
 
     /**

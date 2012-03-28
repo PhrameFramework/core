@@ -64,7 +64,7 @@ class Route
      */
     public function __construct($app = null)
     {
-        $this->app     = $app ?: Application::instance();
+        $this->app     = $app ?: Applications::instance();
         $this->config  = new Config('route', $this->app);
 
         // Process request_uri

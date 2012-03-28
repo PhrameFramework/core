@@ -32,7 +32,7 @@ class Config
     public function __construct($config_name = null, $app = null, $package = null)
     {
         $config_name  = $config_name ?: 'application';
-        $app          = $app         ?: Application::instance();
+        $app          = $app         ?: Applications::instance();
         $package      = $package     ?: 'phrame/core';
 
         $this->config = array();

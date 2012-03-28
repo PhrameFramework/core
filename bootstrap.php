@@ -28,7 +28,7 @@ class Bootstrap
         defined('APPLICATION_NAME')   or define('APPLICATION_NAME', getenv('APPLICATION_NAME') ?: 'main');
         defined('APPLICATION_ENV')    or define('APPLICATION_ENV', getenv('APPLICATION_ENV') ?: 'development');
 
-        $app = $app ?: Application::instance();
+        $app = $app ?: Applications::instance();
 
         $app->run();
     }

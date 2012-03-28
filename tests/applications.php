@@ -14,7 +14,7 @@ namespace Phrame\Core\Tests;
 
 use Phrame\Core;
 
-class Application extends \PHPUnit_Framework_TestCase
+class Applications extends \PHPUnit_Framework_TestCase
 {
     protected $app;
 
@@ -23,9 +23,9 @@ class Application extends \PHPUnit_Framework_TestCase
         $this->app = Core\Applications::instance();
     }
 
-    public function test_base_url()
+    public function test_name()
     {
-        $this->assertEquals($this->app->config->base_url, 'http://phrame.loc');
+        $this->assertEquals($this->app->name, APPLICATION_NAME);
     }
 
 }

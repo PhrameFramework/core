@@ -15,13 +15,6 @@ namespace Phrame\Core;
 class Application
 {
     /**
-     * Application instances
-     * 
-     * @var  array
-     */
-    protected static $instances = array();
-
-    /**
      * Application name
      * 
      * @var  string
@@ -85,12 +78,12 @@ class Application
     protected $log = null;
 
     /**
-     * Application constructor (protected)
+     * Application constructor
      *
      * @param   string  $name  Application name
      * @return  void
      */
-    protected function __construct($name = '')
+    public function __construct($name = '')
     {
         $this->name    = $name ?: APPLICATION_NAME;
         $this->config  = new Config('application', $this);
@@ -141,24 +134,6 @@ class Application
 
         $this->asset  = new Asset($this);
         $this->lang   = new Lang($this);
-    }
-
-    /**
-     * Returns Application instance
-     *
-     * @param   string       $application_name  Application name
-     * @return  Application
-     */
-    public static function instance($application_name = null)
-    {
-        $application_name = $application_name ?: APPLICATION_NAME;
-
-        if ( ! isset(self::$instances[$application_name]))
-        {
-            self::$instances[$application_name] = new Application($application_name);
-        }
-
-        return self::$instances[$application_name];
     }
 
     /**

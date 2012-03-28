@@ -64,7 +64,7 @@ class Lang
      */    
     public function __construct($app = null)
     {
-        $this->app     = $app ?: Application::instance();
+        $this->app     = $app ?: Applications::instance();
         $this->config  = new Config('lang', $this->app);
 
         $this->language              = $this->config->language === 'auto' ? strtolower(substr($_SERVER["HTTP_ACCEPT_LANGUAGE"], 0, 2)) : $this->config->language;

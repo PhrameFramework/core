@@ -24,7 +24,7 @@ class Config extends \PHPUnit_Framework_TestCase
 
     public function setUp()
     {
-        $this->app          = Core\Application::instance();
+        $this->app          = Core\Applications::instance();
         $this->config       = new Core\Config('application', $this->app);
         $this->config_array = include APPLICATIONS_PATH.'/'.APPLICATION_NAME.'/config/application.php';
     }

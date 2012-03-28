@@ -36,7 +36,7 @@ class Log
      */    
     public function __construct($app = null)
     {
-        $this->app  = $app ?: Application::instance();
+        $this->app  = $app ?: Applications::instance();
 
         $dir_name  = APPLICATIONS_PATH.'/'.$this->app->name.'/logs/';
 

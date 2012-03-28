@@ -69,7 +69,7 @@ class Request
      */
     public function __construct($app = null, $server = array(), $get = array(), $post = array(), $cookie = array(), $session = array())
     {
-        $this->app = $app ?: Application::instance();
+        $this->app = $app ?: Applications::instance();
 
         $this->server   = ! empty($server)  ? $server  : $_SERVER;
         $this->get      = ! empty($get)     ? $get     : $_GET;

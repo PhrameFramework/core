@@ -20,7 +20,7 @@ class Route extends \PHPUnit_Framework_TestCase
 
     public function setUp()
     {
-        $this->app  = Core\Application::instance();
+        $this->app  = Core\Applications::instance();
     }
 
     public function test_default_route()
