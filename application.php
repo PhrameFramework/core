@@ -175,7 +175,7 @@ class Application
             $this->request->server('request_uri', $uri);
         }
 
-        $this->route     = new Route($this);
+        $this->route     = new Route($this->name);
         $this->response  = new Response($this->name);
 
         return $this->response;

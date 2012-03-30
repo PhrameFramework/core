@@ -15,6 +15,13 @@ namespace Phrame\Core;
 class Route
 {
     /**
+     * Application string
+     * 
+     * @var  string
+     */
+    protected $app_name = null;
+
+    /**
      * Application object
      * 
      * @var  Application
@@ -59,13 +66,15 @@ class Route
     /**
      * Creates Route object
      * 
-     * @param   Application  $app  Application object
+     * @param   string  $app_name  Application name
      * @return  void
      */
-    public function __construct($app = null)
+    public function __construct($app_name = null)
     {
-        $this->app     = $app ?: Applications::instance();
-        $this->config  = new Config('route', $this->app->name);
+        $this->app_name  = $app_name ?: APPLICATION_NAME;
+        $this->app       = Applications::instance($this->app_name);
+
+        $this->config    = new Config('route', $this->app_name);
 
         // Process request_uri
         $request_uri = trim($this->app->request->server('request_uri'), '/');
