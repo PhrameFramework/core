@@ -23,7 +23,7 @@ class Asset extends \PHPUnit_Framework_TestCase
     public function setUp()
     {
         $this->app    = Core\Applications::instance();
-        $this->asset  = new Core\Asset($this->app);
+        $this->asset  = new Core\Asset($this->app->name);
     }
 
     public function test_css()

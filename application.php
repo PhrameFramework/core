@@ -129,7 +129,7 @@ class Application
         foreach ($this->config->packages as $package)
         {
             // Call package's init (\Phrame\Activerecord\Bootstrap::init($this) for example)
-            call_user_func('\\'.str_replace(' ', '\\', ucwords(str_replace('/', ' ', strtolower($package)))).'\\Bootstrap::init', $this);
+            call_user_func('\\'.str_replace(' ', '\\', ucwords(str_replace('/', ' ', strtolower($package)))).'\\Bootstrap::init', $this->name);
         }
 
         $this->asset  = new Asset($this->name);
