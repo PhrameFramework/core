@@ -117,7 +117,7 @@ class Application
             ini_set('display_errors', $this->config->display_errors);
 
             // error and exception handler
-            $this->error   = new Error($this);
+            $this->error   = new Error($this->name);
             set_error_handler(array($this->error, 'error_handler'));
             set_exception_handler(array($this->error, 'exception_handler'));
 
