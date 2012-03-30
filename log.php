@@ -24,7 +24,7 @@ class Log
     /**
      * Constructs Log object
      * 
-     * @param   Application  $app  Application object
+     * @param   string  $app_name  Application name
      * @return  void
      */    
     public function __construct($app_name = null)
