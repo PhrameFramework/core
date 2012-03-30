@@ -15,6 +15,13 @@ namespace Phrame\Core;
 class Request
 {
     /**
+     * Application string
+     * 
+     * @var  string
+     */
+    protected $app_name = null;
+
+    /**
      * Application object
      * 
      * @var  Application
@@ -59,17 +66,18 @@ class Request
     /**
      * Constructs Request object
      * 
-     * @param   Application  $app      Application object
-     * @param   array        $server   Server parameters
-     * @param   array        $get      Get parameters
-     * @param   array        $post     Post parameters
-     * @param   array        $cookie   Cookie parameters
-     * @param   array        $session  Session parameters
-     * @return  void
+     * @param   string  $app_name  Application name
+     * @param   array   $server    Server parameters
+     * @param   array   $get       Get parameters
+     * @param   array   $post      Post parameters
+     * @param   array   $cookie    Cookie parameters
+     * @param   array   $session  Session parameters
+     * @return  voi d
      */
-    public function __construct($app = null, $server = array(), $get = array(), $post = array(), $cookie = array(), $session = array())
+    public function __construct($app_name = null, $server = array(), $get = array(), $post = array(), $cookie = array(), $session = array())
     {
-        $this->app = $app ?: Applications::instance();
+        $this->app_name  = $app_name ?: APPLICATION_NAME;
+        $this->app       = Applications::instance($this->app_name);
 
         $this->server   = ! empty($server)  ? $server  : $_SERVER;
         $this->get      = ! empty($get)     ? $get     : $_GET;

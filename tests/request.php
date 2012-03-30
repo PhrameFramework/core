@@ -35,7 +35,7 @@ class Request extends \PHPUnit_Framework_TestCase
 
         $this->app->config->use_sessions = true;
         
-        $this->request  = new Core\Request($this->app);
+        $this->request  = new Core\Request($this->app->name);
     }
 
     public function test_escape()

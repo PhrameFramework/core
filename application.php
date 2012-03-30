@@ -168,7 +168,7 @@ class Application
      */
     public function response($uri = null)
     {
-        $this->request   = new Request($this);
+        $this->request   = new Request($this->name);
 
         if ( ! empty($uri))
         {
