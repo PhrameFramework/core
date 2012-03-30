@@ -71,8 +71,8 @@ class Request
      * @param   array   $get       Get parameters
      * @param   array   $post      Post parameters
      * @param   array   $cookie    Cookie parameters
-     * @param   array   $session  Session parameters
-     * @return  voi d
+     * @param   array   $session   Session parameters
+     * @return  void
      */
     public function __construct($app_name = null, $server = array(), $get = array(), $post = array(), $cookie = array(), $session = array())
     {
