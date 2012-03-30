@@ -15,6 +15,13 @@ namespace Phrame\Core;
 class Controller
 {
     /**
+     * Application name
+     * 
+     * @var  string
+     */
+    protected $app_name = null;
+
+    /**
      * Application object
      * 
      * @var  Application
@@ -31,12 +38,13 @@ class Controller
     /**
      * Constructs Controller object
      * 
-     * @param   Application  $app  Application object
+     * @param   string  $app_name  Application name
      * @return  void
      */
-    public function __construct($app = null)
+    public function __construct($app_name = null)
     {
-        $this->app = $app ?: Applications::instance();
+        $this->app_name  = $app_name ?: APPLICATION_NAME;
+        $this->app       = Applications::instance($this->app_name);
     }
 
     /**

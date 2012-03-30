@@ -170,7 +170,7 @@ class Response
     public function body()
     {
         $controller_class  = '\\'.ucfirst($this->app->route->application).'\\Controllers\\'.str_replace(' ', '\\', ucwords(str_replace('/', ' ', strtolower($this->app->route->controller))));
-        $controller        = new $controller_class(Applications::instance($this->app->route->application));
+        $controller        = new $controller_class($this->app->route->application);
         $action            = $this->app->route->action;
         $parameters        = $this->app->route->parameters;
 
