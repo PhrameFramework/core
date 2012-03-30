@@ -15,7 +15,7 @@ namespace Phrame\Core;
 class Request
 {
     /**
-     * Application string
+     * Application name
      * 
      * @var  string
      */

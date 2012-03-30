@@ -15,7 +15,7 @@ namespace Phrame\Core;
 class Response
 {
     /**
-     * Application string
+     * Application name
      * 
      * @var  string
      */

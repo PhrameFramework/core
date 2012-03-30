@@ -15,7 +15,7 @@ namespace Phrame\Core;
 class Route
 {
     /**
-     * Application string
+     * Application name
      * 
      * @var  string
      */
