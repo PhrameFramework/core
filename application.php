@@ -132,7 +132,7 @@ class Application
             call_user_func('\\'.str_replace(' ', '\\', ucwords(str_replace('/', ' ', strtolower($package)))).'\\Bootstrap::init', $this);
         }
 
-        $this->asset  = new Asset($this);
+        $this->asset  = new Asset($this->name);
         $this->lang   = new Lang($this);
     }
 

@@ -15,11 +15,11 @@ namespace Phrame\Core;
 class Asset
 {
     /**
-     * Application object
+     * Application name
      * 
-     * @var  Application
+     * @var  string
      */
-    protected $app = null;
+    protected $app_name = null;
 
     /**
      * Asset configuration
@@ -31,13 +31,13 @@ class Asset
     /**
      * Constructs Asset object
      * 
-     * @param   Application  $app  Application object
+     * @param   string  $app_name  Application name
      * @return  void
      */    
-    public function __construct($app = null)
+    public function __construct($app_name = null)
     {
-        $this->app     = $app ?: Applications::instance();
-        $this->config  = new Config('asset', $this->app->name);
+        $this->app_name = $app_name ?: APPLICATION_NAME;
+        $this->config   = new Config('asset', $this->app_name);
     }
 
     /**
@@ -50,9 +50,11 @@ class Asset
      */
     public function render_asset($file_name, $asset_type, $attributes = array())
     {
-        $theme_file   = APPLICATIONS_PATH.'/'.$this->app->name.'/themes/'.$this->app->config->theme.'/assets/'.$asset_type.'/'.$file_name;
-        $public_file  = PUBLIC_PATH.'/assets/'.$this->app->name.'-'.$this->app->config->theme.'/'.$asset_type.'/'.$file_name;
-        $public_url   = $this->app->config->base_url.'/assets/'.$this->app->name.'-'.$this->app->config->theme.'/'.$asset_type.'/'.$file_name;
+        $app = Applications::instance($this->app_name);
+
+        $theme_file   = APPLICATIONS_PATH.'/'.$app->name.'/themes/'.$app->config->theme.'/assets/'.$asset_type.'/'.$file_name;
+        $public_file  = PUBLIC_PATH.'/assets/'.$app->name.'-'.$app->config->theme.'/'.$asset_type.'/'.$file_name;
+        $public_url   = $app->config->base_url.'/assets/'.$app->name.'-'.$app->config->theme.'/'.$asset_type.'/'.$file_name;
 
         if ( ! is_file($public_file) or filemtime($public_file) != filemtime($theme_file))
         {
