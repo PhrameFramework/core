@@ -190,7 +190,7 @@ class Response
 
         if ( ! isset($controller->layout))
         {
-            $controller->layout = new View('layout', array(), $this->app);
+            $controller->layout = new View('layout', array(), $this->app_name);
         }
         $output = call_user_func_array(array($controller, $action), $parameters);
 

@@ -15,6 +15,13 @@ namespace Phrame\Core;
 class View
 {
     /**
+     * Application name
+     * 
+     * @var  string
+     */
+    protected $app_name = null;
+
+    /**
      * Application object
      * 
      * @var  Application
@@ -38,16 +45,18 @@ class View
     /**
      * Creates View object
      * 
-     * @param   string       $view_name  View name
-     * @param   array        $data       Data for view
-     * @param   Application  $app        Application object
+     * @param   string  $view_name  View name
+     * @param   array   $data       Data for view
+     * @param   string  $app_name   Application name
      * @return  void
      */
-    public function __construct($view_name, $data = array(), $app = null)
+    public function __construct($view_name, $data = array(), $app_name = null)
     {
         $this->view_name  = $view_name;
         $this->data       = $data;
-        $this->app        = $app ?: Applications::instance();
+
+        $this->app_name  = $app_name ?: APPLICATION_NAME;
+        $this->app       = Applications::instance($this->app_name);
     }
 
     /**
@@ -91,14 +100,14 @@ class View
         extract($this->data, EXTR_REFS);
 
         ob_start();
-        if (is_file(APPLICATIONS_PATH.'/'.$this->app->name.'/themes/'.$this->app->config->theme.'/'.$this->view_name.'.php'))
+        if (is_file(APPLICATIONS_PATH.'/'.$this->app_name.'/themes/'.$this->app->config->theme.'/'.$this->view_name.'.php'))
         {
-            include APPLICATIONS_PATH.'/'.$this->app->name.'/themes/'.$this->app->config->theme.'/'.$this->view_name.'.php';
+            include APPLICATIONS_PATH.'/'.$this->app_name.'/themes/'.$this->app->config->theme.'/'.$this->view_name.'.php';
         }
         // checking system theme
-        elseif (is_file(APPLICATIONS_PATH.'/'.$this->app->name.'/themes/system/'.$this->view_name.'.php'))
+        elseif (is_file(APPLICATIONS_PATH.'/'.$this->app_name.'/themes/system/'.$this->view_name.'.php'))
         {
-            include APPLICATIONS_PATH.'/'.$this->app->name.'/themes/system/'.$this->view_name.'.php';
+            include APPLICATIONS_PATH.'/'.$this->app_name.'/themes/system/'.$this->view_name.'.php';
         }
         elseif (is_file(__DIR__.'/themes/system/'.$this->view_name.'.php'))
         {

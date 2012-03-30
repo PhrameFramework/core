@@ -23,7 +23,7 @@ class View extends \PHPUnit_Framework_TestCase
     public function setUp()
     {
         $this->app   = Core\Applications::instance();
-        $this->view  = new Core\View('home', array(), $this->app);
+        $this->view  = new Core\View('home', array(), $this->app->name);
     }
 
     public function test_data()
