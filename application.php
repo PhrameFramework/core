@@ -176,7 +176,7 @@ class Application
         }
 
         $this->route     = new Route($this);
-        $this->response  = new Response($this);
+        $this->response  = new Response($this->name);
 
         return $this->response;
     }

@@ -15,6 +15,13 @@ namespace Phrame\Core;
 class Response
 {
     /**
+     * Application string
+     * 
+     * @var  string
+     */
+    protected $app_name = null;
+
+    /**
      * Application object
      * 
      * @var  Application
@@ -59,13 +66,15 @@ class Response
     /**
      * Constructs Response object
      * 
-     * @param   Application  $app  Application object
+     * @param   string  $app_name  Application name
      * @return  void
      */
-    public function __construct($app = null)
+    public function __construct($app_name = null)
     {
-        $this->app      = $app ?: Applications::instance();
-        $this->session  = $this->app->request->session();
+        $this->app_name  = $app_name ?: APPLICATION_NAME;
+        $this->app       = Applications::instance($this->app_name);
+
+        $this->session   = $this->app->request->session();
     }
 
     /**
