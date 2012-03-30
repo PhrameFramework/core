@@ -15,13 +15,6 @@ namespace Phrame\Core;
 class Log
 {
     /**
-     * Application object
-     * 
-     * @var  Application
-     */
-    protected $app = null;
-
-    /**
      * Logfile name
      * 
      * @var  string
@@ -34,11 +27,11 @@ class Log
      * @param   Application  $app  Application object
      * @return  void
      */    
-    public function __construct($app = null)
+    public function __construct($app_name = null)
     {
-        $this->app  = $app ?: Applications::instance();
+        $app_name  = $app_name ?: APPLICATION_NAME;
 
-        $dir_name  = APPLICATIONS_PATH.'/'.$this->app->name.'/logs/';
+        $dir_name  = APPLICATIONS_PATH.'/'.$app_name.'/logs/';
 
         if ( ! is_dir($dir_name))
         {

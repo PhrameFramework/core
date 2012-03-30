@@ -122,7 +122,7 @@ class Application
             set_exception_handler(array($this->error, 'exception_handler'));
 
             // logger
-            $this->log     = new Log($this);
+            $this->log     = new Log($this->name);
         }
 
         // Load packages
