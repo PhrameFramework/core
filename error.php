@@ -15,21 +15,21 @@ namespace Phrame\Core;
 class Error
 {
     /**
-     * Application object
+     * Application name
      * 
-     * @var  Application
+     * @var  string
      */
-    protected $app = null;
+    protected $app_name = null;
 
     /**
      * Constructs Error object
      * 
-     * @param   Application  $app  Application object
+     * @param   string  $app_name  Application name
      * @return  void
      */    
-    public function __construct($app = null)
+    public function __construct($app_name = null)
     {
-        $this->app  = $app ?: Applications::instance();
+        $this->app_name  = $app_name ?: APPLICATION_NAME;
     }
 
     /**
@@ -40,7 +40,9 @@ class Error
      */
     public function exception_handler($exception)
     {
-        if (isset($this->app->log))
+        $app = Applications::instance($this->app_name);
+
+        if (isset($app->log))
         {
             $log_message = 'type: '.get_class($exception).'. ';
             $log_message .= 'code: '.$exception->getCode().'. ';
@@ -48,10 +50,10 @@ class Error
             $log_message .= 'file: '.$exception->getFile().'. ';
             $log_message .= 'line: '.$exception->getLine();
 
-            $this->app->log->write($log_message);
+            $app->log->write($log_message);
         }
 
-        if ($this->app->config->display_exceptions)
+        if ($app->config->display_exceptions)
         {
             $view = new View(
                 'errors/exception',
@@ -63,7 +65,7 @@ class Error
                     'line'     => $exception->getLine(),
                     'trace'    => $exception->getTrace()
                 ),
-                $this->app
+                $app
             );
 
             echo $view;
@@ -81,14 +83,16 @@ class Error
      */
     public function error_handler($errno, $errstr, $errfile, $errline)
     {
-        if (isset($this->app->log))
+        $app = Applications::instance($this->app_name);
+
+        if (isset($app->log))
         {
             $log_message = 'code: '.$errno.'. ';
             $log_message .= 'message: '.$errstr.'. ';
             $log_message .= 'file: '.$errfile.'. ';
             $log_message .= 'line: '.$errline;
 
-            $this->app->log->write($log_message);
+            $app->log->write($log_message);
         }
 
         if (error_reporting() & $errno)
@@ -101,7 +105,7 @@ class Error
                     'file'     => $errfile,
                     'line'     => $errline
                 ),
-                $this->app
+                $app
             );
 
             echo $view;
