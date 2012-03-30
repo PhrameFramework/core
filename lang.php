@@ -15,11 +15,11 @@ namespace Phrame\Core;
 class Lang
 {
     /**
-     * Application object
+     * Application name
      * 
-     * @var  Application
+     * @var  string
      */
-    protected $app = null;
+    protected $app_name = null;
 
     /**
      * Lang configuration
@@ -59,13 +59,13 @@ class Lang
     /**
      * Constructs Lang object
      * 
-     * @param   Application  $app  Application object
+     * @param   string  $app_name  Application name
      * @return  void
      */    
-    public function __construct($app = null)
+    public function __construct($app_name = null)
     {
-        $this->app     = $app ?: Applications::instance();
-        $this->config  = new Config('lang', $this->app->name);
+        $this->app_name  = $app_name ?: APPLICATION_NAME;
+        $this->config    = new Config('lang', $this->app_name);
 
         $this->language              = $this->config->language === 'auto' ? strtolower(substr($_SERVER["HTTP_ACCEPT_LANGUAGE"], 0, 2)) : $this->config->language;
         $this->default_language      = $this->config->default_language;

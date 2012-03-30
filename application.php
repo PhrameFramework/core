@@ -133,7 +133,7 @@ class Application
         }
 
         $this->asset  = new Asset($this->name);
-        $this->lang   = new Lang($this);
+        $this->lang   = new Lang($this->name);
     }
 
     /**
