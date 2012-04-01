@@ -54,9 +54,7 @@ class View
     {
         $this->view_name  = $view_name;
         $this->data       = $data;
-
-        $this->app_name  = $app_name ?: APPLICATION_NAME;
-        $this->app       = Applications::instance($this->app_name);
+        $this->app_name   = $app_name ?: APPLICATION_NAME;
     }
 
     /**
@@ -89,6 +87,8 @@ class View
      */
     public function render()
     {
+        $this->app = Applications::instance($this->app_name);
+
         foreach ($this->data as &$data)
         {
             if (is_string($data))
