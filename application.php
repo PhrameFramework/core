@@ -128,7 +128,7 @@ class Application
         // Load packages
         foreach ($this->config->packages as $package)
         {
-            // Call package's init (\Phrame\Activerecord\Bootstrap::init($this) for example)
+            // Call package's init (\Phrame\Activerecord\Bootstrap::init($this->name) for example)
             call_user_func('\\'.str_replace(' ', '\\', ucwords(str_replace('/', ' ', strtolower($package)))).'\\Bootstrap::init', $this->name);
         }
 
