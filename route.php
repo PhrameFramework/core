@@ -58,10 +58,9 @@ class Route
     public function __construct($app_name = null)
     {
         $this->app_name  = $app_name ?: APPLICATION_NAME;
-        $app             = Applications::instance($this->app_name);
 
         // Process request_uri
-        $request_uri = trim($app->request->server('request_uri'), '/');
+        $request_uri = trim(Applications::instance($this->app_name)->request->server('request_uri'), '/');
 
         $path = explode('/', $request_uri);
 
@@ -111,7 +110,15 @@ class Route
             }
         }
 
-        if ( ! $routable)
+        if ($routable)
+        {
+            if ($this->application !== APPLICATION_NAME)
+            {
+                // fix base_url for subapplication
+                Applications::instance($application)->config->base_url = trim(Applications::instance($this->app_name)->config->base_url, '/').'/'.$application;
+            }
+        }
+        else
         {
             $this->application = $this->app_name;
             $this->controller  = $config->default_controller;

@@ -22,13 +22,6 @@ class Request
     protected $app_name = null;
 
     /**
-     * Application object
-     * 
-     * @var  Application
-     */
-    protected $app = null;
-
-    /**
      * Server parameters
      * 
      * @var  array
@@ -77,13 +70,12 @@ class Request
     public function __construct($app_name = null, $server = array(), $get = array(), $post = array(), $cookie = array(), $session = array())
     {
         $this->app_name  = $app_name ?: APPLICATION_NAME;
-        $this->app       = Applications::instance($this->app_name);
 
         $this->server   = ! empty($server)  ? $server  : $_SERVER;
         $this->get      = ! empty($get)     ? $get     : $_GET;
         $this->post     = ! empty($post)    ? $post    : $_POST;
         $this->cookie   = ! empty($cookie)  ? $cookie  : $_COOKIE;
-        $this->session  = ! empty($session) ? $session : (($this->app->config->use_sessions === true and isset($_SESSION)) ? $_SESSION : array());
+        $this->session  = ! empty($session) ? $session : (isset($_SESSION) ? $_SESSION : array());
     }
 
     /**
