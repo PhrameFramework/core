@@ -26,7 +26,7 @@ class Route extends \PHPUnit_Framework_TestCase
     public function test_default_route()
     {
         // generate response
-        $this->app->response();
+        $this->app->response('/');
 
         // check routes
         $this->assertEquals($this->app->route->controller, 'home');
