@@ -22,13 +22,6 @@ class Route
     protected $app_name = null;
 
     /**
-     * Application object
-     * 
-     * @var  Application
-     */
-    protected $app = null;
-
-    /**
      * Application
      * 
      * @var  string
@@ -57,13 +50,6 @@ class Route
     public $parameters;
 
     /**
-     * Routing config
-     * 
-     * @var  Config
-     */
-    protected $config = null;
-
-    /**
      * Creates Route object
      * 
      * @param   string  $app_name  Application name
@@ -72,26 +58,14 @@ class Route
     public function __construct($app_name = null)
     {
         $this->app_name  = $app_name ?: APPLICATION_NAME;
-        $this->app       = Applications::instance($this->app_name);
-
-        $this->config    = new Config('route', $this->app_name);
+        $app             = Applications::instance($this->app_name);
 
         // Process request_uri
-        $request_uri = trim($this->app->request->server('request_uri'), '/');
-
-        // use regexp to choose the appropriate route
-        foreach ($this->config->routes as $old_route => $new_route)
-        {
-            if (preg_match('#'.$old_route.'#', $request_uri) > 0)
-            {
-                $request_uri = preg_replace('#'.$old_route.'#', $new_route, $request_uri);
-                break;
-            }
-        }
+        $request_uri = trim($app->request->server('request_uri'), '/');
 
         $path = explode('/', $request_uri);
 
-        $applications = array($this->app->name, array_shift($path));
+        $applications = array($this->app_name, array_shift($path));
         $uris         = array($request_uri, implode('/', $path));
 
         $routable = false;
@@ -100,9 +74,23 @@ class Route
         {
             if ( ! $routable and ! empty($application))
             {
+                $config = new Config('route', $application);
+
+                $request_uri = $uris[$key];
+
+                // use regexp to choose the appropriate route
+                foreach ($config->routes as $old_route => $new_route)
+                {
+                    if (preg_match('#'.$old_route.'#', $request_uri) > 0)
+                    {
+                        $request_uri = preg_replace('#'.$old_route.'#', $new_route, $request_uri);
+                        break;
+                    }
+                }
+
                 $this->application  = $application;
-                $this->controller   = $uris[$key] ?: $this->config->default_controller;
-                $this->action       = $this->config->default_action;
+                $this->controller   = $request_uri ?: $config->default_controller;
+                $this->action       = $config->default_action;
                 $this->parameters   = array();
 
                 while ( ! $routable and ! empty($this->controller))
@@ -125,8 +113,8 @@ class Route
 
         if ( ! $routable)
         {
-            $this->application = $this->app->name;
-            $this->controller  = $this->config->default_controller;
+            $this->application = $this->app_name;
+            $this->controller  = $config->default_controller;
             $this->action      = '';
         }
     }
