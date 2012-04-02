@@ -115,7 +115,7 @@ class Route
             if ($this->application !== APPLICATION_NAME)
             {
                 // fix base_url for subapplication
-                Applications::instance($this->application)->config->base_url = trim(Applications::instance($this->app_name)->config->base_url, '/').'/'.$application;
+                Applications::instance($this->application)->config->base_url = trim(Applications::instance($this->app_name)->config->base_url, '/').'/'.$this->application;
             }
         }
         else
