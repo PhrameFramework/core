@@ -41,19 +41,19 @@ class Asset
     }
 
     /**
-     * Renders tags
+     * Copies file into public folder
+     * and returns public url
      * 
      * @param   string  $file_name   Asset file name
      * @param   string  $asset_type  Asset type (img|css|js)
-     * @param   array   $attributes  Tag attributes
      * @return  string
      */
-    public function render_asset($file_name, $asset_type, $attributes = array())
+    public function publish_file($file_name, $asset_type)
     {
         $app = Applications::instance($this->app_name);
 
-        $theme_file   = APPLICATIONS_PATH.'/'.$app->name.'/themes/'.$app->config->theme.'/assets/'.$asset_type.'/'.$file_name;
-        $public_file  = PUBLIC_PATH.'/assets/'.$app->name.'-'.$app->config->theme.'/'.$asset_type.'/'.$file_name;
+        $theme_file   = APPLICATIONS_PATH.'/'.$this->app_name.'/themes/'.$app->config->theme.'/assets/'.$asset_type.'/'.$file_name;
+        $public_file  = PUBLIC_PATH.'/assets/'.$this->app_name.'-'.$app->config->theme.'/'.$asset_type.'/'.$file_name;
         $public_url   = $app->config->base_url.'/assets/'.$app->name.'-'.$app->config->theme.'/'.$asset_type.'/'.$file_name;
 
         if ( ! is_file($public_file) or filemtime($public_file) != filemtime($theme_file))
@@ -71,6 +71,21 @@ class Asset
         {
             $public_url .= '?'.filemtime($public_file);
         }
+
+        return $public_url;
+    }
+
+    /**
+     * Renders tags
+     * 
+     * @param   string  $file_name   Asset file name
+     * @param   string  $asset_type  Asset type (img|css|js)
+     * @param   array   $attributes  Tag attributes
+     * @return  string
+     */
+    public function render_asset($file_name, $asset_type, $attributes = array())
+    {
+        $public_url = $this->publish_file($file_name, $asset_type);
 
         $attr = '';
         foreach($attributes as $name => $value)
