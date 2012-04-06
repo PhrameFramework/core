@@ -30,7 +30,7 @@ class Asset extends \PHPUnit_Framework_TestCase
     {
         $this->assertEquals(
             preg_match(
-                "#<link type=\"text\/css\" rel=\"stylesheet\" href=\"http\:\/\/phrame.loc\/assets\/".$this->app->name.'-'.$this->app->config->theme."\/css\/bootstrap.css\?[0-9]+\" \/>#",
+                "#<link type=\"text\/css\" rel=\"stylesheet\" href=\"http\:\/\/phrame.loc\/assets\/".$this->app->name.'/'.$this->app->config->theme."\/css\/bootstrap.css\?[0-9]+\" \/>#",
                 $this->asset->css('bootstrap.css')
             ),
             1
