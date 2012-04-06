@@ -41,6 +41,64 @@ class Asset
     }
 
     /**
+     * Copies directory $from_path into $to_path
+     *
+     * @param  string  $from_path
+     * @param  string  $to_path
+     */
+    protected function copy_dir($from_path, $to_path)
+    {
+        $from_path = rtrim($from_path, '/');
+        $to_path   = rtrim($to_path, '/');
+
+        if( ! is_dir($to_path))
+        {
+            mkdir($to_path, 0777, true);
+        }
+
+        if (is_dir($from_path))
+        {
+            chdir($from_path);
+            $handle = opendir('.');
+            while (($file = readdir($handle)) !== false)
+            {
+                if (($file != '.') and ($file != '..'))
+                {
+                    if (is_dir($file))
+                    {
+                        $this->copy_dir($from_path.'/'.$file, $to_path.'/'.$file);
+                        chdir($from_path); 
+                    }
+                    elseif (is_file($file))
+                    {
+                        copy($from_path.'/'.$file, $to_path.'/'.$file);
+                    }
+                }
+            }
+            closedir($handle);
+        }
+    }
+
+    /**
+     * Copies all assets into public folder
+     * 
+     * @param   bool  $force_copy  Do not check is_dir
+     * @return  void
+     */
+    public function publish($force_copy = false)
+    {
+        $app = Applications::instance($this->app_name);
+
+        if ($force_copy or ! is_dir(PUBLIC_PATH.'/assets/'.$this->app_name.'/'.$app->config->theme))
+        {
+            $this->copy_dir(
+                APPLICATIONS_PATH.'/'.$this->app_name.'/themes/'.$app->config->theme.'/assets',
+                PUBLIC_PATH.'/assets/'.$this->app_name.'/'.$app->config->theme
+            );
+        }
+    }
+
+    /**
      * Copies file into public folder
      * and returns public url
      * 
@@ -53,8 +111,8 @@ class Asset
         $app = Applications::instance($this->app_name);
 
         $theme_file   = APPLICATIONS_PATH.'/'.$this->app_name.'/themes/'.$app->config->theme.'/assets/'.$asset_type.'/'.$file_name;
-        $public_file  = PUBLIC_PATH.'/assets/'.$this->app_name.'-'.$app->config->theme.'/'.$asset_type.'/'.$file_name;
-        $public_url   = $app->config->base_url.'/assets/'.$app->name.'-'.$app->config->theme.'/'.$asset_type.'/'.$file_name;
+        $public_file  = PUBLIC_PATH.'/assets/'.$this->app_name.'/'.$app->config->theme.'/'.$asset_type.'/'.$file_name;
+        $public_url   = $app->config->base_url.'/assets/'.$this->app_name.'/'.$app->config->theme.'/'.$asset_type.'/'.$file_name;
 
         if ( ! is_file($public_file) or filemtime($public_file) != filemtime($theme_file))
         {

@@ -169,6 +169,9 @@ class Application
      */
     public function response($uri = null)
     {
+        // Publishing assets
+        $this->asset->publish(true);
+
         if ( ! empty($uri))
         {
             $this->request->server('request_uri', $uri);
