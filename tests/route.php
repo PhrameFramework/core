@@ -29,7 +29,7 @@ class Route extends \PHPUnit_Framework_TestCase
         $this->app->response('/');
 
         // check routes
-        $this->assertEquals($this->app->route->controller, 'home');
+        $this->assertEquals($this->app->route->controller, 'index');
         $this->assertEquals($this->app->route->action, 'index');
     }
 
@@ -46,7 +46,7 @@ class Route extends \PHPUnit_Framework_TestCase
         $this->app->response('main');
 
         // check routes
-        $this->assertEquals($this->app->route->controller, 'home');
+        $this->assertEquals($this->app->route->controller, 'index');
         $this->assertEquals($this->app->route->action, 'index');
     }
 
@@ -56,7 +56,7 @@ class Route extends \PHPUnit_Framework_TestCase
         $this->app->response('404');
 
         // check routes
-        $this->assertEquals($this->app->route->controller, 'home');
+        $this->assertEquals($this->app->route->controller, 'index');
         $this->assertEquals($this->app->route->action, '');
     }
 

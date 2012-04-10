@@ -5,7 +5,7 @@ return array(
     /**
      * Default controller name
      */
-    'default_controller' => 'home',
+    'default_controller' => 'index',
 
     /**
      * Default action name
