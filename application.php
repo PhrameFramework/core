@@ -170,7 +170,7 @@ class Application
     public function response($uri = null)
     {
         // Publishing assets
-        $this->asset->publish(true);
+        $this->asset->publish();
 
         if ( ! empty($uri))
         {
