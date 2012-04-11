@@ -164,7 +164,7 @@ class Application
     /**
      * Process request (or provided uri) and returns response
      * 
-     * @param   string  $uri  URI to process
+     * @param   string    $uri  URI to process
      * @return  Response
      */
     public function response($uri = null)

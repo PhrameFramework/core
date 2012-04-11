@@ -103,7 +103,7 @@ class Response
     /**
      * Sets response status
      * 
-     * @param   int  $status  Status code
+     * @param   int   $status  Status code
      * @return  void
      */
     public function status($status)
