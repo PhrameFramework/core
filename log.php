@@ -51,7 +51,7 @@ class Log
     {
         $message = '['.date('Y-m-d H:i:s').'] '.$message."\n";
 
-        $f = fopen($this->file_name , 'a');
+        $f = fopen($this->file_name, 'a');
         fwrite($f, $message);
         fclose($f);
     }
