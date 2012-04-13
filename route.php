@@ -69,13 +69,13 @@ class Route
 
         $routable = false;
 
-        foreach ($applications as $key => $application)
+        foreach ($applications as $application)
         {
             if ( ! $routable and ! empty($application))
             {
                 $config = new Config('route', $application);
 
-                $request_uri = $uris[$key];
+                $request_uri = array_shift($uris);
 
                 // use regexp to choose the appropriate route
                 foreach ($config->routes as $old_route => $new_route)
