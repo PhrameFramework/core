@@ -46,4 +46,26 @@ class Applications
         return self::$instances[$app_name];
     }
 
+    /**
+     * Returns content of the provided app_name and uri
+     * 
+     * @param   string  $app_name  Application name and uri (optional)
+     * @return  string
+     */
+    public static function content($app_name = null)
+    {
+        return self::instance($app_name)->response()->body->content;
+    }
+
+    /**
+     * Runs application
+     * 
+     * @param   string  $app_name  Application name and uri (optional)
+     * @return  void
+     */
+    public static function run($app_name = null)
+    {
+        self::instance($app_name)->run();
+    }
+
 }
