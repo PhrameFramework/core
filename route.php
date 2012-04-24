@@ -14,6 +14,11 @@ namespace Phrame\Core;
 
 /**
  * Route class
+ * 
+ * @property  string  $application  Application
+ * @property  string  $controller   Controller
+ * @property  string  $action       Action
+ * @property  array   $parameters   Parameters
  */
 class Route
 {
