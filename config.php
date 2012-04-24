@@ -100,8 +100,9 @@ class Config implements \ArrayAccess
     /**
      * Implements ArrayAccess method
      *
-     * @param  mixed  $offset
-     * @param  mixed  $value
+     * @param   mixed  $offset
+     * @param   mixed  $value
+     * @return  void
      */
     public function offsetSet($offset, $value)
     {
@@ -129,7 +130,8 @@ class Config implements \ArrayAccess
     /**
      * Implements ArrayAccess method
      *
-     * @param  mixed  $offset
+     * @param   mixed  $offset
+     * @return  void
      */
     public function offsetUnset($offset)
     {
