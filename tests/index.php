@@ -16,9 +16,7 @@ defined('PUBLIC_PATH')        or define('PUBLIC_PATH', realpath(__DIR__.'/sandbo
 defined('APPLICATION_NAME')   or define('APPLICATION_NAME', getenv('APPLICATION_NAME') ?: 'main');
 defined('APPLICATION_ENV')    or define('APPLICATION_ENV', getenv('APPLICATION_ENV') ?: 'development');
 
-/**
- * Registering autoloader
- */
+// Registering autoloader
 spl_autoload_register(
     function ($class_name)
     {

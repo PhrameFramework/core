@@ -27,7 +27,7 @@ class Config implements \ArrayAccess
     protected $config = array();
 
     /**
-     * Contstructs Config object
+     * Constructs Config object
      * 
      * @param  string  $config_name  Configuration name
      * @param  string  $app_name     Application name
