@@ -55,7 +55,7 @@ class Error
             $app->log->write($log_message);
         }
 
-        if ($app->config->display_exceptions)
+        if ($app->config['display_exceptions'])
         {
             $view = new View(
                 'errors/exception',

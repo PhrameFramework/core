@@ -221,7 +221,7 @@ class Response
     {
         $body = $this->body ?: $this->body();
 
-        if ($this->app->config->use_sessions === true)
+        if ($this->app->config['use_sessions'] === true)
         {
             // set session parameters
             $_SESSION = $this->session;

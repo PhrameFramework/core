@@ -14,8 +14,10 @@ namespace Phrame\Core;
 
 /**
  * Config class
+ *
+ * @implements  \ArrayAccess
  */
-class Config
+class Config implements \ArrayAccess
 {
     /**
      * Configuration array
@@ -93,6 +95,56 @@ class Config
     public function __set($name, $value)
     {
         $this->config[$name] = $value;
+    }
+
+    /**
+     * Implements ArrayAccess method
+     *
+     * @param  mixed  $offset
+     * @param  mixed  $value
+     */
+    public function offsetSet($offset, $value)
+    {
+        if (is_null($offset))
+        {
+            $this->config[] = $value;
+        }
+        else
+        {
+            $this->config[$offset] = $value;
+        }
+    }
+
+    /**
+     * Implements ArrayAccess method
+     *
+     * @param   mixed  $offset
+     * @return  bool
+     */
+    public function offsetExists($offset)
+    {
+        return isset($this->config[$offset]);
+    }
+
+    /**
+     * Implements ArrayAccess method
+     *
+     * @param  mixed  $offset
+     */
+    public function offsetUnset($offset)
+    {
+        unset($this->config[$offset]);
+    }
+
+    /**
+     * Implements ArrayAccess method
+     *
+     * @param   mixed  $offset
+     * @return  mixed
+     */
+    public function offsetGet($offset)
+    {
+        return isset($this->config[$offset]) ? $this->config[$offset] : null;
     }
 
 }

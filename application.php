@@ -101,7 +101,7 @@ class Application
         $this->request  = new Request($this->name);
         $this->config   = new Config('application', $this->name);
 
-        if ($this->config->use_sessions === true)
+        if ($this->config['use_sessions'] === true)
         {
             session_start();
         }
@@ -121,13 +121,13 @@ class Application
         {
             $base_url .= rtrim(str_replace('\\', '/', dirname($_SERVER['SCRIPT_NAME'])), '/');
         }
-        $this->config->base_url = $base_url;
+        $this->config['base_url'] = $base_url;
 
         // Error reporting
         if ($this->name === APPLICATION_NAME)
         {
-            error_reporting($this->config->error_reporting);
-            ini_set('display_errors', $this->config->display_errors);
+            error_reporting($this->config['error_reporting']);
+            ini_set('display_errors', $this->config['display_errors']);
 
             // error and exception handler
             $this->error   = new Error($this->name);
@@ -139,7 +139,7 @@ class Application
         }
 
         // Load packages
-        foreach ($this->config->packages as $package)
+        foreach ($this->config['packages'] as $package)
         {
             // Call package's init (\Phrame\Activerecord\Bootstrap::init($this->name) for example)
             call_user_func('\\'.str_replace(' ', '\\', ucwords(str_replace('/', ' ', strtolower($package)))).'\\Bootstrap::init', $this->name);

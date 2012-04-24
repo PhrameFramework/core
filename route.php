@@ -80,7 +80,7 @@ class Route
                 $request_uri = array_shift($uris);
 
                 // use regexp to choose the appropriate route
-                foreach ($config->routes as $old_route => $new_route)
+                foreach ($config['routes'] as $old_route => $new_route)
                 {
                     if (preg_match('#'.$old_route.'#', $request_uri) > 0)
                     {
@@ -90,8 +90,8 @@ class Route
                 }
 
                 $this->application  = $application;
-                $this->controller   = $request_uri ?: $config->default_controller;
-                $this->action       = $config->default_action;
+                $this->controller   = $request_uri ?: $config['default_controller'];
+                $this->action       = $config['default_action'];
                 $this->parameters   = array();
 
                 while ( ! $routable and ! empty($this->controller))
@@ -100,8 +100,8 @@ class Route
                     $routable = is_file(APPLICATIONS_PATH.'/'.$this->application.'/controllers/'.$this->controller.'.php') && method_exists($controller_class, $this->action);
                     if ( ! $routable)
                     {
-                        $controller_class = '\\'.ucfirst($this->application).'\\Controllers\\'.str_replace(' ', '\\', ucwords(str_replace('/', ' ', strtolower($this->controller.'/'.$config->default_controller))));
-                        $routable = is_file(APPLICATIONS_PATH.'/'.$this->application.'/controllers/'.$this->controller.'/'.$config->default_controller.'.php') && method_exists($controller_class, $this->action);
+                        $controller_class = '\\'.ucfirst($this->application).'\\Controllers\\'.str_replace(' ', '\\', ucwords(str_replace('/', ' ', strtolower($this->controller.'/'.$config['default_controller']))));
+                        $routable = is_file(APPLICATIONS_PATH.'/'.$this->application.'/controllers/'.$this->controller.'/'.$config['default_controller'].'.php') && method_exists($controller_class, $this->action);
                         if ( ! $routable)
                         {
                             $path = explode('/', $this->controller);
@@ -112,7 +112,7 @@ class Route
                         }
                         else
                         {
-                            $this->controller  = $this->controller.'/'.$config->default_controller;
+                            $this->controller  = $this->controller.'/'.$config['default_controller'];
                         }
                     }
                 }
@@ -124,7 +124,7 @@ class Route
             if ($this->application !== APPLICATION_NAME)
             {
                 // fix base_url for subapplication
-                Applications::instance($this->application)->config->base_url = trim(Applications::instance($this->app_name)->config->base_url, '/').'/'.$this->application;
+                Applications::instance($this->application)->config['base_url'] = trim(Applications::instance($this->app_name)->config['base_url'], '/').'/'.$this->application;
             }
         }
         else
@@ -132,7 +132,7 @@ class Route
             $config = new Config('route', $this->app_name);
 
             $this->application = $this->app_name;
-            $this->controller  = $config->default_controller;
+            $this->controller  = $config['default_controller'];
             $this->action      = '';
         }
     }

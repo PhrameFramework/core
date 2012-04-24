@@ -105,9 +105,9 @@ class View
         extract($this->data, EXTR_REFS);
 
         ob_start();
-        if (is_file(APPLICATIONS_PATH.'/'.$this->app_name.'/themes/'.$this->app->config->theme.'/'.$this->view_name.'.php'))
+        if (is_file(APPLICATIONS_PATH.'/'.$this->app_name.'/themes/'.$this->app->config['theme'].'/'.$this->view_name.'.php'))
         {
-            include APPLICATIONS_PATH.'/'.$this->app_name.'/themes/'.$this->app->config->theme.'/'.$this->view_name.'.php';
+            include APPLICATIONS_PATH.'/'.$this->app_name.'/themes/'.$this->app->config['theme'].'/'.$this->view_name.'.php';
         }
         // checking system theme
         elseif (is_file(APPLICATIONS_PATH.'/'.$this->app_name.'/themes/system/'.$this->view_name.'.php'))

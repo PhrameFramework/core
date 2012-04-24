@@ -71,7 +71,6 @@ class Controller
     public function __call($method, $parameters)
     {
         $this->app->response->status(404);
-
         $this->error_404();
     }
 

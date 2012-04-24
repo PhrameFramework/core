@@ -69,10 +69,10 @@ class Lang
         $this->app_name  = $app_name ?: APPLICATION_NAME;
         $this->config    = new Config('lang', $this->app_name);
 
-        $this->language              = $this->config->language === 'auto' ? strtolower(substr($_SERVER["HTTP_ACCEPT_LANGUAGE"], 0, 2)) : $this->config->language;
-        $this->default_language      = $this->config->default_language;
-        $this->translations          = isset($this->config->translations[$this->language]) ? $this->config->translations[$this->language] : array();
-        $this->default_translations  = isset($this->config->translations[$this->default_language]) ? $this->config->translations[$this->default_language] : array();
+        $this->language              = $this->config['language'] === 'auto' ? strtolower(substr($_SERVER["HTTP_ACCEPT_LANGUAGE"], 0, 2)) : $this->config['language'];
+        $this->default_language      = $this->config['default_language'];
+        $this->translations          = isset($this->config['translations'][$this->language]) ? $this->config['translations'][$this->language] : array();
+        $this->default_translations  = isset($this->config['translations'][$this->default_language]) ? $this->config['translations'][$this->default_language] : array();
     }
 
     /**

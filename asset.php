@@ -91,11 +91,11 @@ class Asset
     {
         $app = Applications::instance($this->app_name);
 
-        if ($force_copy or ! is_dir(PUBLIC_PATH.'/assets/'.$this->app_name.'/'.$app->config->theme))
+        if ($force_copy or ! is_dir(PUBLIC_PATH.'/assets/'.$this->app_name.'/'.$app->config['theme']))
         {
             $this->copy_dir(
-                APPLICATIONS_PATH.'/'.$this->app_name.'/themes/'.$app->config->theme.'/assets',
-                PUBLIC_PATH.'/assets/'.$this->app_name.'/'.$app->config->theme
+                APPLICATIONS_PATH.'/'.$this->app_name.'/themes/'.$app->config['theme'].'/assets',
+                PUBLIC_PATH.'/assets/'.$this->app_name.'/'.$app->config['theme']
             );
         }
     }
@@ -112,9 +112,9 @@ class Asset
     {
         $app = Applications::instance($this->app_name);
 
-        $theme_file   = APPLICATIONS_PATH.'/'.$this->app_name.'/themes/'.$app->config->theme.'/assets/'.$asset_type.'/'.$file_name;
-        $public_file  = PUBLIC_PATH.'/assets/'.$this->app_name.'/'.$app->config->theme.'/'.$asset_type.'/'.$file_name;
-        $public_url   = $app->config->base_url.'/assets/'.$this->app_name.'/'.$app->config->theme.'/'.$asset_type.'/'.$file_name;
+        $theme_file   = APPLICATIONS_PATH.'/'.$this->app_name.'/themes/'.$app->config['theme'].'/assets/'.$asset_type.'/'.$file_name;
+        $public_file  = PUBLIC_PATH.'/assets/'.$this->app_name.'/'.$app->config['theme'].'/'.$asset_type.'/'.$file_name;
+        $public_url   = $app->config['base_url'].'/assets/'.$this->app_name.'/'.$app->config['theme'].'/'.$asset_type.'/'.$file_name;
 
         if ( ! is_file($public_file) or filemtime($public_file) != filemtime($theme_file))
         {
@@ -127,7 +127,7 @@ class Asset
             touch($public_file, filemtime($theme_file));
         }
 
-        if ($this->config->append_timestamp === true)
+        if ($this->config['append_timestamp'] === true)
         {
             $public_url .= '?'.filemtime($public_file);
         }
