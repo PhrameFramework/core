@@ -12,6 +12,11 @@
 
 namespace Phrame\Core;
 
+/**
+ * Response class
+ *
+ * @property  View  $body
+ */
 class Response
 {
     /**
@@ -66,8 +71,7 @@ class Response
     /**
      * Constructs Response object
      * 
-     * @param   string  $app_name  Application name
-     * @return  void
+     * @param  string  $app_name  Application name
      */
     public function __construct($app_name = null)
     {
@@ -250,6 +254,8 @@ class Response
         {
             return $body;
         }
+
+        return null;
     }
 
 }

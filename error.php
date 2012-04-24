@@ -12,6 +12,9 @@
 
 namespace Phrame\Core;
 
+/**
+ * Error class
+ */
 class Error
 {
     /**
@@ -24,8 +27,7 @@ class Error
     /**
      * Constructs Error object
      * 
-     * @param   string  $app_name  Application name
-     * @return  void
+     * @param  string  $app_name  Application name
      */    
     public function __construct($app_name = null)
     {

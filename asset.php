@@ -12,6 +12,9 @@
 
 namespace Phrame\Core;
 
+/**
+ * Asset class
+ */
 class Asset
 {
     /**
@@ -31,8 +34,7 @@ class Asset
     /**
      * Constructs Asset object
      * 
-     * @param   string  $app_name  Application name
-     * @return  void
+     * @param  string  $app_name  Application name
      */    
     public function __construct($app_name = null)
     {

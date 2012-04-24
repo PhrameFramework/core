@@ -12,6 +12,9 @@
 
 namespace Phrame\Core;
 
+/**
+ * Lang class
+ */
 class Lang
 {
     /**
@@ -59,8 +62,7 @@ class Lang
     /**
      * Constructs Lang object
      * 
-     * @param   string  $app_name  Application name
-     * @return  void
+     * @param  string  $app_name  Application name
      */    
     public function __construct($app_name = null)
     {

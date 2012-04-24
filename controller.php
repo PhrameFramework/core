@@ -12,6 +12,11 @@
 
 namespace Phrame\Core;
 
+/**
+ * Controller class
+ *
+ * @property  View  $layout
+ */
 class Controller
 {
     /**
@@ -38,8 +43,7 @@ class Controller
     /**
      * Constructs Controller object
      * 
-     * @param   string  $app_name  Application name
-     * @return  void
+     * @param  string  $app_name  Application name
      */
     public function __construct($app_name = null)
     {

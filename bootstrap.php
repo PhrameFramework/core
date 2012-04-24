@@ -12,6 +12,9 @@
 
 namespace Phrame\Core;
 
+/**
+ * Bootstrap class
+ */
 class Bootstrap
 {
     /**

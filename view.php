@@ -12,6 +12,11 @@
 
 namespace Phrame\Core;
 
+/**
+ * View class
+ *
+ * @property  string  $content  Content
+ */
 class View
 {
     /**
@@ -45,10 +50,9 @@ class View
     /**
      * Creates View object
      * 
-     * @param   string  $view_name  View name
-     * @param   array   $data       Data for view
-     * @param   string  $app_name   Application name
-     * @return  void
+     * @param  string  $view_name  View name
+     * @param  array   $data       Data for view
+     * @param  string  $app_name   Application name
      */
     public function __construct($view_name, $data = array(), $app_name = null)
     {
@@ -97,6 +101,7 @@ class View
             }
         }
 
+        $content = '';
         extract($this->data, EXTR_REFS);
 
         ob_start();

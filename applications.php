@@ -12,6 +12,9 @@
 
 namespace Phrame\Core;
 
+/**
+ * Applications class
+ */
 class Applications
 {
     /**

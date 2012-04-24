@@ -12,6 +12,19 @@
 
 namespace Phrame\Core;
 
+/**
+ * Application class
+ *
+ * @property  string    $name      Application name
+ * @property  Config    $config    Config object
+ * @property  Request   $request   Request object
+ * @property  Route     $route     Route object
+ * @property  Response  $response  Response object
+ * @property  Asset     $asset     Asset object
+ * @property  Lang      $lang      Lang object
+ * @property  Error     $error     Error object
+ * @property  Log       $log       Log object
+ */
 class Application
 {
     /**
@@ -80,8 +93,7 @@ class Application
     /**
      * Application constructor
      *
-     * @param   string  $name  Application name
-     * @return  void
+     * @param  string  $name  Application name
      */
     public function __construct($name = '')
     {

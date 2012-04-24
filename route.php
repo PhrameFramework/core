@@ -12,6 +12,9 @@
 
 namespace Phrame\Core;
 
+/**
+ * Route class
+ */
 class Route
 {
     /**
@@ -52,8 +55,7 @@ class Route
     /**
      * Creates Route object
      * 
-     * @param   string  $app_name  Application name
-     * @return  void
+     * @param  string  $app_name  Application name
      */
     public function __construct($app_name = null)
     {
@@ -127,6 +129,8 @@ class Route
         }
         else
         {
+            $config = new Config('route', $this->app_name);
+
             $this->application = $this->app_name;
             $this->controller  = $config->default_controller;
             $this->action      = '';

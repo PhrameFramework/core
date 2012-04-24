@@ -12,6 +12,9 @@
 
 namespace Phrame\Core;
 
+/**
+ * Config class
+ */
 class Config
 {
     /**
@@ -24,10 +27,9 @@ class Config
     /**
      * Contstructs Config object
      * 
-     * @param   string  $config_name  Configuration name
-     * @param   string  $app_name     Application name
-     * @param   string  $package      Package name
-     * @return  void
+     * @param  string  $config_name  Configuration name
+     * @param  string  $app_name     Application name
+     * @param  string  $package      Package name
      */
     public function __construct($config_name = null, $app_name = null, $package = null)
     {

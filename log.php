@@ -12,6 +12,9 @@
 
 namespace Phrame\Core;
 
+/**
+ * Log class
+ */
 class Log
 {
     /**
@@ -24,8 +27,7 @@ class Log
     /**
      * Constructs Log object
      * 
-     * @param   string  $app_name  Application name
-     * @return  void
+     * @param  string  $app_name  Application name
      */    
     public function __construct($app_name = null)
     {

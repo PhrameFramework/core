@@ -12,6 +12,9 @@
 
 namespace Phrame\Core;
 
+/**
+ * Request class
+ */
 class Request
 {
     /**
@@ -59,13 +62,12 @@ class Request
     /**
      * Constructs Request object
      * 
-     * @param   string  $app_name  Application name
-     * @param   array   $server    Server parameters
-     * @param   array   $get       Get parameters
-     * @param   array   $post      Post parameters
-     * @param   array   $cookie    Cookie parameters
-     * @param   array   $session   Session parameters
-     * @return  void
+     * @param  string  $app_name  Application name
+     * @param  array   $server    Server parameters
+     * @param  array   $get       Get parameters
+     * @param  array   $post      Post parameters
+     * @param  array   $cookie    Cookie parameters
+     * @param  array   $session   Session parameters
      */
     public function __construct($app_name = null, $server = array(), $get = array(), $post = array(), $cookie = array(), $session = array())
     {

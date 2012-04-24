@@ -12,6 +12,9 @@
 
 namespace Phrame\Core;
 
+/**
+ * Model class
+ */
 class Model
 {
     /**
@@ -38,8 +41,7 @@ class Model
     /**
      * Constructs model
      * 
-     * @param   array  $row  Initial data
-     * @return  void
+     * @param  array  $row  Initial data
      */
     public function __construct($row = array())
     {
