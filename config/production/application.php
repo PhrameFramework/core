@@ -1,4 +1,9 @@
 <?php
+/**
+ * Application config for the production environment
+ * 
+ * Copy to the application config directory and make your changes
+ */
 
 return array(
 
