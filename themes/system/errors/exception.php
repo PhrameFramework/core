@@ -1,3 +1,14 @@
+<?php
+/**
+ * @var  string  $type
+ * @var  int     $code
+ * @var  string  $message
+ * @var  string  $file
+ * @var  int     $line
+ * @var  array   $trace
+ */
+?>
+
 <h1><?php echo $type; ?></h1>
 
 <code>

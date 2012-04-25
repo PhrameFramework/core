@@ -1,3 +1,12 @@
+<?php
+/**
+ * @var  int     $code
+ * @var  string  $message
+ * @var  string  $file
+ * @var  int     $line
+ */
+?>
+
 <h1>Error</h1>
 
 <code>
