@@ -24,21 +24,21 @@ class Controller
      * 
      * @var  string
      */
-    protected $app_name = null;
+    protected $app_name;
 
     /**
      * Application object
      * 
      * @var  Application
      */
-    protected $app = null;
+    protected $app;
 
     /**
      * Layout view object
      * 
      * @var  View
      */
-    public $layout = null;
+    public $layout;
 
     /**
      * Constructs Controller object

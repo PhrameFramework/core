@@ -22,14 +22,14 @@ class Asset
      * 
      * @var  string
      */
-    protected $app_name = null;
+    protected $app_name;
 
     /**
      * Asset configuration
      * 
      * @var  Config
      */
-    protected $config = null;
+    protected $config;
 
     /**
      * Constructs Asset object

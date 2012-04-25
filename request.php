@@ -22,7 +22,7 @@ class Request
      * 
      * @var  string
      */
-    protected $app_name = null;
+    protected $app_name;
 
     /**
      * Server parameters

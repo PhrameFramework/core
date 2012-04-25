@@ -27,7 +27,7 @@ class Route
      * 
      * @var  string
      */
-    protected $app_name = null;
+    protected $app_name;
 
     /**
      * Application

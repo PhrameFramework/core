@@ -24,14 +24,14 @@ class View
      * 
      * @var  string
      */
-    protected $app_name = null;
+    protected $app_name;
 
     /**
      * View name
      * 
      * @var  string
      */
-    protected $view_name = null;
+    protected $view_name;
 
     /**
      * Data for view

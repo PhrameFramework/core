@@ -32,63 +32,63 @@ class Application
      * 
      * @var  string
      */
-    protected $name = '';
+    protected $name;
 
     /**
      * Application configuration
      * 
      * @var  Config
      */
-    protected $config = null;
+    protected $config;
 
     /**
      * Request object
      * 
      * @var  Request
      */
-    protected $request = null;
+    protected $request;
 
     /**
      * Route object
      * 
      * @var  Route
      */
-    protected $route = null;
+    protected $route;
 
     /**
      * Response object
      * 
      * @var  Response
      */
-    protected $response = null;
+    protected $response;
 
     /**
      * Asset object
      * 
      * @var  Asset
      */
-    protected $asset = null;
+    protected $asset;
 
     /**
      * Lang object
      * 
      * @var  Lang
      */
-    protected $lang = null;
+    protected $lang;
 
     /**
      * Error object
      * 
      * @var  Error
      */
-    protected $error = null;
+    protected $error;
 
     /**
      * Log object
      * 
      * @var  Log
      */
-    protected $log = null;
+    protected $log;
 
     /**
      * Application constructor

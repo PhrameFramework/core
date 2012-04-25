@@ -22,14 +22,14 @@ class Lang
      * 
      * @var  string
      */
-    protected $app_name = null;
+    protected $app_name;
 
     /**
      * Lang configuration
      * 
      * @var  Config
      */
-    protected $config = null;
+    protected $config;
 
     /**
      * Application language

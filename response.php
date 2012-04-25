@@ -24,14 +24,14 @@ class Response
      * 
      * @var  string
      */
-    protected $app_name = null;
+    protected $app_name;
 
     /**
      * Application object
      * 
      * @var  Application
      */
-    protected $app = null;
+    protected $app;
 
     /**
      * Response status code
@@ -66,7 +66,7 @@ class Response
      * 
      * @var  View
      */
-    protected $body = null;
+    protected $body;
 
     /**
      * Constructs Response object

@@ -22,7 +22,7 @@ class Error
      * 
      * @var  string
      */
-    protected $app_name = null;
+    protected $app_name;
 
     /**
      * Constructs Error object
