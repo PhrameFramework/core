@@ -45,8 +45,9 @@ class Asset
     /**
      * Copies directory $from_path into $to_path
      *
-     * @param  string  $from_path
-     * @param  string  $to_path
+     * @param   string  $from_path
+     * @param   string  $to_path
+     * @return  void
      */
     protected function copy_dir($from_path, $to_path)
     {

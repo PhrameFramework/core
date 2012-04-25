@@ -215,7 +215,7 @@ class Response
     /**
      * Renders response
      * 
-     * @return  string|void
+     * @return  string|null
      */
     public function render()
     {
