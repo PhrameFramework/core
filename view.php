@@ -27,13 +27,6 @@ class View
     protected $app_name = null;
 
     /**
-     * Application object
-     * 
-     * @var  Application
-     */
-    protected $app = null;
-
-    /**
      * View name
      * 
      * @var  string
@@ -91,8 +84,6 @@ class View
      */
     public function render()
     {
-        $this->app = Applications::instance($this->app_name);
-
         foreach ($this->data as &$data)
         {
             if (is_string($data))
@@ -104,10 +95,12 @@ class View
         $content = '';
         extract($this->data, EXTR_REFS);
 
+        $app = Applications::instance($this->app_name);
+
         ob_start();
-        if (is_file(APPLICATIONS_PATH.'/'.$this->app_name.'/themes/'.$this->app->config['theme'].'/'.$this->view_name.'.php'))
+        if (is_file(APPLICATIONS_PATH.'/'.$this->app_name.'/themes/'.$app->config['theme'].'/'.$this->view_name.'.php'))
         {
-            include APPLICATIONS_PATH.'/'.$this->app_name.'/themes/'.$this->app->config['theme'].'/'.$this->view_name.'.php';
+            include APPLICATIONS_PATH.'/'.$this->app_name.'/themes/'.$app->config['theme'].'/'.$this->view_name.'.php';
         }
         // checking system theme
         elseif (is_file(APPLICATIONS_PATH.'/'.$this->app_name.'/themes/system/'.$this->view_name.'.php'))
