@@ -77,13 +77,25 @@ class Lang
 
     /**
      * Returns translated string
-     * 
-     * @param   string  $str  String
+     *
+     * @param   string  $str         String
+     * @param   array   $parameters  Parameters
      * @return  string
      */
-    public function get($str)
+    public function get($str, $parameters = array())
     {
-        return isset($this->translations[$str]) ? $this->translations[$str] : (isset($this->default_translations[$str]) ? $this->default_translations[$str] : $str);
+        $keys = array();
+        $values = array();
+        foreach ($parameters as $k => $v)
+        {
+            $keys[] = '%'.$k.'%';
+            $values[] = $v;
+        }
+
+        $return = isset($this->translations[$str]) ? $this->translations[$str] : (isset($this->default_translations[$str]) ? $this->default_translations[$str] : $str);
+        $return = str_replace($keys, $values, $return);
+
+        return $return;
     }
 
 }
