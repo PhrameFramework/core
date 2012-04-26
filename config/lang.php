@@ -29,6 +29,7 @@ return array(
 
         'ru'  => array(
             //'Home'  => 'Главная',
+            '%name% field is required' => 'Поле %name% обязательно для заполнения',
 
         ),
 

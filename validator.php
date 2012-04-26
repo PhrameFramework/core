@@ -79,7 +79,10 @@ class Validator
                 $values[] = $v;
             }
 
+            $app = Applications::instance($this->app_name);
             $message = $message ?: $this->config[$rule_name]['message'];
+            $message = $app->lang->get($message);
+
             $this->errors[] = str_replace($keys, $values, $message);
         }
 

@@ -45,14 +45,14 @@ class Config implements \ArrayAccess
 
         if (is_file(PACKAGES_PATH.'/'.$package.'/config/'.$config_name.'.php'))
         {
-            $this->config = array_merge(
+            $this->config = $this->merge_arrays(
                 $this->config,
                 include PACKAGES_PATH.'/'.$package.'/config/'.$config_name.'.php'
             );
         }
         if (is_file(PACKAGES_PATH.'/'.$package.'/config/'.APPLICATION_ENV.'/'.$config_name.'.php'))
         {
-            $this->config = array_merge(
+            $this->config = $this->merge_arrays(
                 $this->config,
                 include PACKAGES_PATH.'/'.$package.'/config/'.APPLICATION_ENV.'/'.$config_name.'.php'
             );
@@ -60,18 +60,51 @@ class Config implements \ArrayAccess
 
         if (is_file(APPLICATIONS_PATH.'/'.$app_name.'/config/'.$config_name.'.php'))
         {
-            $this->config = array_merge(
+            $this->config = $this->merge_arrays(
                 $this->config,
                 include APPLICATIONS_PATH.'/'.$app_name.'/config/'.$config_name.'.php'
             );
         }
         if (is_file(APPLICATIONS_PATH.'/'.$app_name.'/config/'.APPLICATION_ENV.'/'.$config_name.'.php'))
         {
-            $this->config = array_merge(
+            $this->config = $this->merge_arrays(
                 $this->config,
                 include APPLICATIONS_PATH.'/'.$app_name.'/config/'.APPLICATION_ENV.'/'.$config_name.'.php'
             );
         }
+    }
+
+    /**
+     * Recursively merges two arrays
+     *
+     * @param   array  $a  First array
+     * @param   array  $b  Second array
+     * @return  array
+     */
+    protected function merge_arrays($a, $b)
+    {
+        $result = $a;
+
+        foreach ($b as $key => $value)
+        {
+            if ( ! isset($result[$key]))
+            {
+                $result[$key] = $value;
+            }
+            else
+            {
+                if ( ! is_array($value))
+                {
+                    $result[$key] = $value;
+                }
+                else
+                {
+                    $result[$key] = $this->merge_arrays($result[$key], $value);
+                }
+            }
+        }
+
+        return $result;
     }
 
     /**
