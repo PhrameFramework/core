@@ -144,9 +144,6 @@ class Application
             // Call package's init (\Phrame\Activerecord\Bootstrap::init($this->name) for example)
             call_user_func('\\'.str_replace(' ', '\\', ucwords(str_replace('/', ' ', strtolower($package)))).'\\Bootstrap::init', $this->name);
         }
-
-        $this->asset  = new Asset($this->name);
-        $this->lang   = new Lang($this->name);
     }
 
     /**
@@ -162,6 +159,17 @@ class Application
             if ($name === 'response' and ! isset($this->response))
             {
                 $this->response = $this->response();
+            }
+            elseif ($name === 'asset' and ! isset($this->asset))
+            {
+                $this->asset = new Asset($this->name);
+
+                // Publishing assets
+                $this->asset->publish();
+            }
+            elseif ($name === 'lang' and ! isset($this->lang))
+            {
+                $this->lang = new Lang($this->name);
             }
 
             return $this->$name;
@@ -181,9 +189,6 @@ class Application
      */
     public function response($uri = null)
     {
-        // Publishing assets
-        $this->asset->publish();
-
         if ( ! empty($uri))
         {
             $this->request->server('request_uri', $uri);
