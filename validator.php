@@ -71,19 +71,9 @@ class Validator
                 $parameters = array('name' => $parameters);
             }
 
-            $keys = array();
-            $values = array();
-            foreach ($parameters as $k => $v)
-            {
-                $keys[] = '%'.$k.'%';
-                $values[] = $v;
-            }
-
             $app = Applications::instance($this->app_name);
             $message = $message ?: $this->config[$rule_name]['message'];
-            $message = $app->lang->get($message);
-
-            $this->errors[] = str_replace($keys, $values, $message);
+            $this->errors[] = $app->lang->get($message, $parameters);
         }
 
         return $valid;
