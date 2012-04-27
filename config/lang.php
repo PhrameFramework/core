@@ -29,7 +29,10 @@ return array(
 
         'ru'  => array(
             //'Home'  => 'Главная',
-            '%name% field is required' => 'Поле %name% обязательно для заполнения',
+            '%name% field is required'                          => 'Поле %name% обязательно для заполнения',
+            '%name% field may only contain numbers'             => 'Поле %name% должно содержать только цифры',
+            '%name% field may only contain letters'             => 'Поле %name% должно содержать только буквы',
+            '%name% field may only contain letters and numbers' => 'Поле %name% должно содержать только буквы и цифры',
 
         ),
 
