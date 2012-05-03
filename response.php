@@ -213,21 +213,26 @@ class Response
     }
 
     /**
-     * Renders response
-     * 
-     * @return  string|null
+     * Sets session parameters
+     *
+     * @return  void
      */
-    public function render()
+    public function send_session()
     {
-        $body = $this->body ?: $this->body();
-
         if ($this->app->config['use_sessions'] === true)
         {
             // set session parameters
             $_SESSION = $this->session;
         }
+    }
 
-        // send cookies
+    /**
+     * Sends cookies
+     *
+     * @return  void
+     */
+    public function send_cookies()
+    {
         foreach ($this->cookie as $cookie)
         {
             setcookie(
@@ -240,6 +245,22 @@ class Response
                 isset($cookie['httponly']) ? $cookie['httponly'] : false
             );
         }
+    }
+
+    /**
+     * Renders response
+     * 
+     * @return  string|null
+     */
+    public function render()
+    {
+        $body = $this->body ?: $this->body();
+
+        // send session
+        $this->send_session();
+
+        // send cookies
+        $this->send_cookies();
 
         // Send status
         header('x', true, $this->status);

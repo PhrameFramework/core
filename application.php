@@ -98,13 +98,14 @@ class Application
     public function __construct($name = '')
     {
         $this->name     = $name ?: APPLICATION_NAME;
-        $this->request  = new Request($this->name);
         $this->config   = new Config('application', $this->name);
 
         if ($this->config['use_sessions'] === true)
         {
             session_start();
         }
+
+        $this->request  = new Request($this->name);
 
         // set base_url
         $base_url = '';
