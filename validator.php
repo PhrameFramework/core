@@ -54,29 +54,45 @@ class Validator
     /**
      * Validates value on rule
      *
-     * @param   mixed   $value       Value
-     * @param   string  $rule_name   Rule name
-     * @param   array   $parameters  Field name and other parameters
-     * @param   string  $message     Message
+     * @param   mixed         $value       Value
+     * @param   string        $rules       Rules, separated by |
+     * @param   string|array  $parameters  Field name and other parameters
+     * @param   string|array  $messages    Messages
      * @return  bool
      */
-    public function validate($value, $rule_name, $parameters = array(), $message = '')
+    public function validate($value, $rules, $parameters = array(), $messages = array())
     {
-        $valid = preg_match('#'.$this->config[$rule_name]['rule'].'#', $value) > 0;
+        $return = true;
 
-        if ( ! $valid)
+        $rules = explode('|', $rules);
+
+        foreach ($rules as $rule)
         {
-            if ( ! is_array($parameters))
+            $rule = trim($rule);
+
+            $valid = preg_match('#'.$this->config[$rule]['rule'].'#', $value) > 0;
+
+            if ( ! $valid)
             {
-                $parameters = array('name' => $parameters);
+                if ( ! is_array($parameters))
+                {
+                    $parameters = array('name' => $parameters);
+                }
+
+                if ( ! is_array($messages))
+                {
+                    $messages = array($messages);
+                }
+
+                $app = Applications::instance($this->app_name);
+                $message = isset($messages[$rule]) ? $messages[$rule] : $this->config[$rule]['message'];
+                $this->errors[] = $app->lang->get($message, $parameters);
             }
 
-            $app = Applications::instance($this->app_name);
-            $message = $message ?: $this->config[$rule_name]['message'];
-            $this->errors[] = $app->lang->get($message, $parameters);
+            $return = $valid && $return;
         }
 
-        return $valid;
+        return $return;
     }
 
 }
