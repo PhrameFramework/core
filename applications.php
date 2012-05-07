@@ -32,6 +32,7 @@ class Applications
      */
     public static function instance($app_name = null)
     {
+        $app_name = $app_name && is_string($app_name) ? $app_name : APPLICATION_NAME;
         $uri      = explode('/', $app_name);
         $app_name = array_shift($uri) ?: APPLICATION_NAME;
         $uri      = implode('/', $uri);
