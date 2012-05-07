@@ -50,7 +50,7 @@ class View
     public function __construct($view_name, $data = array(), $app_name = null)
     {
         $this->view_name  = $view_name;
-        $this->data       = $data;
+        $this->data       = $data ?: array();
         $this->app_name   = $app_name ?: APPLICATION_NAME;
     }
 
