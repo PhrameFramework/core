@@ -221,4 +221,34 @@ class Request
         return isset($this->session[$name]) ? $this->session[$name] : null;
     }
 
+    /**
+     * Returns true if method is GET
+     *
+     * @return  bool
+     */
+    public function is_get()
+    {
+        return $this->method() === 'GET';
+    }
+
+    /**
+     * Returns true if method is POST
+     *
+     * @return  bool
+     */
+    public function is_post()
+    {
+        return $this->method() === 'POST';
+    }
+
+    /**
+     * Returns true if the request is ajax
+     *
+     * @return  bool
+     */
+    public function is_ajax()
+    {
+        return $this->server('HTTP_X_REQUESTED_WITH') === 'XMLHttpRequest';
+    }
+
 }
