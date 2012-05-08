@@ -27,17 +27,18 @@ class Applications
     /**
      * Returns Application instance
      *
-     * @param   string       $app_name  Application name and uri (optional)
+     * @param   string       $app_name      Application name and uri (optional)
+     * @param   bool         $force_create  Should application be created anyway
      * @return  Application
      */
-    public static function instance($app_name = null)
+    public static function instance($app_name = null, $force_create = false)
     {
         $app_name = $app_name && is_string($app_name) ? $app_name : APPLICATION_NAME;
         $uri      = explode('/', $app_name);
         $app_name = array_shift($uri) ?: APPLICATION_NAME;
         $uri      = implode('/', $uri);
 
-        if ( ! isset(self::$instances[$app_name]))
+        if ( ! isset(self::$instances[$app_name]) or $force_create)
         {
             self::$instances[$app_name] = new Application($app_name);
         }
