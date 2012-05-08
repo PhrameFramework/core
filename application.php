@@ -163,7 +163,7 @@ class Application
             }
             elseif ($name === 'response' and ! isset($this->response))
             {
-                $this->response = $this->response();
+                $this->response = new Response($this->name);
             }
             elseif ($name === 'asset' and ! isset($this->asset))
             {
