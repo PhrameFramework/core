@@ -157,7 +157,11 @@ class Application
     {
         if (in_array($name, array('name', 'config', 'request', 'route', 'response', 'asset', 'lang', 'error', 'log')))
         {
-            if ($name === 'response' and ! isset($this->response))
+            if ($name === 'route' and ! isset($this->route))
+            {
+                $this->route = new Route($this->name);
+            }
+            elseif ($name === 'response' and ! isset($this->response))
             {
                 $this->response = $this->response();
             }
@@ -195,7 +199,6 @@ class Application
             $this->request->server('request_uri', $uri);
         }
 
-        $this->route     = new Route($this->name);
         $this->response  = new Response($this->name);
 
         return $this->response;
