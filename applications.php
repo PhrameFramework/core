@@ -59,7 +59,7 @@ class Applications
      */
     public static function content($app_name = null)
     {
-        return self::instance($app_name)->response()->body->content;
+        return self::instance($app_name)->get_response()->body->content;
     }
 
     /**

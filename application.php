@@ -192,7 +192,7 @@ class Application
      * @param   string    $uri  URI to process
      * @return  Response
      */
-    public function response($uri = null)
+    public function get_response($uri = null)
     {
         if ( ! empty($uri))
         {
@@ -211,7 +211,7 @@ class Application
      */
     public function run()
     {
-        echo $this->response()->render();
+        echo $this->get_response()->render();
     }
 
 }
