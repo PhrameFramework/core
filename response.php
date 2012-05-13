@@ -93,7 +93,7 @@ class Response
         {
             if ($name === 'body' and ! isset($this->body))
             {
-                $this->body = $this->body();
+                $this->body = $this->get_body();
             }
 
             return $this->$name;
@@ -180,7 +180,7 @@ class Response
      * 
      * @return  View
      */
-    public function body()
+    public function get_body()
     {
         $controller_class  = '\\'.ucfirst($this->app->route->application).'\\Controllers\\'.str_replace(' ', '\\', ucwords(str_replace('/', ' ', strtolower($this->app->route->controller))));
         $controller        = new $controller_class($this->app->route->application);
@@ -254,7 +254,7 @@ class Response
      */
     public function render()
     {
-        $body = $this->body ?: $this->body();
+        $body = $this->body ?: $this->get_body();
 
         // send session
         $this->send_session();
