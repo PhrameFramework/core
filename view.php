@@ -95,7 +95,7 @@ class View
         $content = '';
         extract($this->data, EXTR_REFS);
 
-        $app = Applications::instance($this->app_name);
+        $app = Applications::get_instance($this->app_name);
 
         ob_start();
         if (is_file(APPLICATIONS_PATH.'/'.$this->app_name.'/themes/'.$app->config['theme'].'/'.$this->view_name.'.php'))

@@ -31,7 +31,7 @@ class Applications
      * @param   bool         $force_create  Should application be created anyway
      * @return  Application
      */
-    public static function instance($app_name = null, $force_create = false)
+    public static function get_instance($app_name = null, $force_create = false)
     {
         $app_name = $app_name && is_string($app_name) ? $app_name : APPLICATION_NAME;
         $uri      = explode('/', $app_name);
@@ -57,9 +57,9 @@ class Applications
      * @param   string  $app_name  Application name and uri (optional)
      * @return  string
      */
-    public static function content($app_name = null)
+    public static function get_content($app_name = null)
     {
-        return self::instance($app_name)->get_response()->body->content;
+        return self::get_instance($app_name)->get_response()->body->content;
     }
 
     /**
@@ -70,7 +70,7 @@ class Applications
      */
     public static function run($app_name = null)
     {
-        self::instance($app_name)->run();
+        self::get_instance($app_name)->run();
     }
 
 }

@@ -76,7 +76,7 @@ class Response
     public function __construct($app_name = null)
     {
         $this->app_name  = $app_name ?: APPLICATION_NAME;
-        $this->app       = Applications::instance($this->app_name);
+        $this->app       = Applications::get_instance($this->app_name);
 
         $this->session   = $this->app->request->session();
     }

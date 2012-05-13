@@ -42,7 +42,7 @@ class Form extends View
     {
         parent::__construct($view_name, $data, $app_name);
 
-        $this->app        = Applications::instance($this->app_name);
+        $this->app        = Applications::get_instance($this->app_name);
         $this->validator  = new Validator($this->app_name);
     }
 

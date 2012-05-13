@@ -31,7 +31,7 @@ class Request extends \PHPUnit_Framework_TestCase
         $_COOKIE['test']   = 'cookie_test';
         $_SESSION['test']  = 'session_test';
 
-        $this->app      = Core\Applications::instance(APPLICATION_NAME, true);
+        $this->app      = Core\Applications::get_instance(APPLICATION_NAME, true);
 
         $this->app->config->use_sessions = true;
         

@@ -67,7 +67,7 @@ class Route
         $this->app_name  = $app_name ?: APPLICATION_NAME;
 
         // Process request_uri
-        $request_uri = trim(Applications::instance($this->app_name)->request->server('request_uri'), '/');
+        $request_uri = trim(Applications::get_instance($this->app_name)->request->server('request_uri'), '/');
 
         $path = explode('/', $request_uri);
 
@@ -129,7 +129,7 @@ class Route
             if ($this->application !== APPLICATION_NAME)
             {
                 // fix base_url for subapplication
-                Applications::instance($this->application)->config['base_url'] = trim(Applications::instance($this->app_name)->config['base_url'], '/').'/'.$this->application;
+                Applications::get_instance($this->application)->config['base_url'] = trim(Applications::get_instance($this->app_name)->config['base_url'], '/').'/'.$this->application;
             }
         }
         else

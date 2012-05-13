@@ -84,7 +84,7 @@ class Validator
                     $messages = array($messages);
                 }
 
-                $app = Applications::instance($this->app_name);
+                $app = Applications::get_instance($this->app_name);
                 $message = isset($messages[$rule]) ? $messages[$rule] : $this->config[$rule]['message'];
                 $this->errors[] = $app->lang->get($message, $parameters);
             }

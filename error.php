@@ -42,7 +42,7 @@ class Error
      */
     public function exception_handler($exception)
     {
-        $app = Applications::instance($this->app_name);
+        $app = Applications::get_instance($this->app_name);
 
         if (isset($app->log))
         {
@@ -85,7 +85,7 @@ class Error
      */
     public function error_handler($errno, $errstr, $errfile, $errline)
     {
-        $app = Applications::instance($this->app_name);
+        $app = Applications::get_instance($this->app_name);
 
         if (isset($app->log))
         {
