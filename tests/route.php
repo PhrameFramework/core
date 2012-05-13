@@ -26,7 +26,7 @@ class Route extends \PHPUnit_Framework_TestCase
     public function test_default_route()
     {
         // generate response
-        $this->app->response('/');
+        $this->app->get_response('/');
 
         // check routes
         $this->assertEquals($this->app->route->controller, 'index');
@@ -43,7 +43,7 @@ class Route extends \PHPUnit_Framework_TestCase
     public function test_custom_route()
     {
         // generate response
-        $this->app->response('main');
+        $this->app->get_response('main');
 
         // check routes
         $this->assertEquals($this->app->route->controller, 'index');
@@ -53,7 +53,7 @@ class Route extends \PHPUnit_Framework_TestCase
     public function test_unroutable_route()
     {
         // generate response
-        $this->app->response('404');
+        $this->app->get_response('404');
 
         // check routes
         $this->assertEquals($this->app->route->controller, 'index');

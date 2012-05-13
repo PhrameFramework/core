@@ -25,7 +25,7 @@ class Response extends \PHPUnit_Framework_TestCase
 
     public function test_body()
     {
-        $this->assertEquals($this->app->response('/')->body->content, 'Hello, world');
+        $this->assertEquals($this->app->get_response('/')->body->content, 'Hello, world');
     }
 
 }
