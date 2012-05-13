@@ -110,7 +110,7 @@ class Response
      * @param   int   $status  Status code
      * @return  void
      */
-    public function status($status)
+    public function set_status($status)
     {
         $this->status = $status;
     }
@@ -121,9 +121,33 @@ class Response
      * @param   string  $header  Header
      * @return  void
      */
-    public function header($header)
+    public function set_header($header)
     {
         $this->header[] = $header;
+    }
+
+    /**
+     * Redirects to the url
+     *
+     * @param   string  $url  URL
+     * @return  void
+     */
+    public function redirect($url)
+    {
+        header('Location: '.$url, true, 302);
+        exit(0);
+    }
+
+    /**
+     * Add session parameter
+     *
+     * @param   string  $name   Parameter name
+     * @param   string  $value  Parameter value
+     * @return  void
+     */
+    public function set_session($name, $value)
+    {
+        $this->session[$name] = $value;
     }
 
     /**
@@ -138,7 +162,7 @@ class Response
      * @param   bool    $httponly  Is the cookie http only?
      * @return  void
      */
-    public function cookie($name, $value, $expire = null, $path = null, $domain = null, $secure = null, $httponly = null)
+    public function set_cookie($name, $value, $expire = null, $path = null, $domain = null, $secure = null, $httponly = null)
     {
         $this->cookie[$name] = array(
             'name'      => $name,
@@ -149,67 +173,6 @@ class Response
             'secure'    => $secure   ?: false,
             'httponly'  => $httponly ?: true,
         );
-    }
-
-    /**
-     * Add session parameter
-     * 
-     * @param   string  $name   Parameter name
-     * @param   string  $value  Parameter value
-     * @return  void
-     */
-    public function session($name, $value)
-    {
-        $this->session[$name] = $value;
-    }
-
-    /**
-     * Redirects to the url
-     * 
-     * @param   string  $url  URL
-     * @return  void
-     */
-    public function redirect($url)
-    {
-        header('Location: '.$url, true, 302);
-        exit(0);
-    }
-
-    /**
-     * Returns layout object
-     * 
-     * @return  View
-     */
-    public function get_body()
-    {
-        $controller_class  = '\\'.ucfirst($this->app->route->application).'\\Controllers\\'.str_replace(' ', '\\', ucwords(str_replace('/', ' ', strtolower($this->app->route->controller))));
-        $controller        = new $controller_class($this->app->route->application);
-        $action            = $this->app->route->action;
-        $parameters        = $this->app->route->parameters;
-
-        if (APPLICATION_ENV === 'production')
-        {
-            ob_start();
-        }
-
-        if ( ! isset($controller->layout))
-        {
-            $controller->layout = new View('layout', array(), $this->app_name);
-        }
-        $output = call_user_func_array(array($controller, $action), $parameters);
-
-        if (APPLICATION_ENV === 'production')
-        {
-            ob_end_clean();
-        }
-
-        // Any string data returned by the controller should be treated as a layout's content
-        if ( ! empty($output) and is_string($output))
-        {
-            $controller->layout->content = $output;
-        }
-
-        return $controller->layout;
     }
 
     /**
@@ -245,6 +208,43 @@ class Response
                 isset($cookie['httponly']) ? $cookie['httponly'] : true
             );
         }
+    }
+
+    /**
+     * Returns layout object
+     *
+     * @return  View
+     */
+    public function get_body()
+    {
+        $controller_class  = '\\'.ucfirst($this->app->route->application).'\\Controllers\\'.str_replace(' ', '\\', ucwords(str_replace('/', ' ', strtolower($this->app->route->controller))));
+        $controller        = new $controller_class($this->app->route->application);
+        $action            = $this->app->route->action;
+        $parameters        = $this->app->route->parameters;
+
+        if (APPLICATION_ENV === 'production')
+        {
+            ob_start();
+        }
+
+        if ( ! isset($controller->layout))
+        {
+            $controller->layout = new View('layout', array(), $this->app_name);
+        }
+        $output = call_user_func_array(array($controller, $action), $parameters);
+
+        if (APPLICATION_ENV === 'production')
+        {
+            ob_end_clean();
+        }
+
+        // Any string data returned by the controller should be treated as a layout's content
+        if ( ! empty($output) and is_string($output))
+        {
+            $controller->layout->content = $output;
+        }
+
+        return $controller->layout;
     }
 
     /**
