@@ -60,7 +60,7 @@ class Validator
      * @param   string|array  $messages    Messages
      * @return  bool
      */
-    public function validate($value, $rules, $parameters = array(), $messages = array())
+    public function is_valid($value, $rules, $parameters = array(), $messages = array())
     {
         $return = true;
 

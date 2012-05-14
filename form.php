@@ -51,7 +51,7 @@ class Form extends View
      *
      * @return  bool
      */
-    public function valid()
+    public function is_valid()
     {
         return true;
     }
