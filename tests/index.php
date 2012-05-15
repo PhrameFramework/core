@@ -13,7 +13,7 @@
 defined('APPLICATIONS_PATH')  or define('APPLICATIONS_PATH', realpath(__DIR__.'/sandbox/applications'));
 defined('PACKAGES_PATH')      or define('PACKAGES_PATH', realpath(__DIR__.'/../../..'));
 defined('PUBLIC_PATH')        or define('PUBLIC_PATH', realpath(__DIR__.'/sandbox/public'));
-defined('APPLICATION_NAME')   or define('APPLICATION_NAME', getenv('APPLICATION_NAME') ?: 'main');
+defined('APPLICATION_NAME')   or define('APPLICATION_NAME', getenv('APPLICATION_NAME') ?: 'test');
 defined('APPLICATION_ENV')    or define('APPLICATION_ENV', getenv('APPLICATION_ENV') ?: 'development');
 
 // Registering autoloader
