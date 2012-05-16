@@ -114,4 +114,19 @@ class Error
         }
     }
 
+    public function shutdown_handler()
+    {
+        $last_error = error_get_last();
+
+        if ($last_error)
+        {
+            $this->error_handler(
+                $last_error['type'],
+                $last_error['message'],
+                $last_error['file'],
+                $last_error['line']
+            );
+        }
+    }
+
 }

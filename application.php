@@ -134,6 +134,7 @@ class Application
             $this->error   = new Error($this->name);
             set_error_handler(array($this->error, 'error_handler'));
             set_exception_handler(array($this->error, 'exception_handler'));
+            register_shutdown_function(array($this->error, 'shutdown_handler'));
 
             // logger
             $this->log     = new Log($this->name);
