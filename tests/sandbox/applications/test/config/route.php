@@ -16,7 +16,7 @@ return array(
      * Routes
      */
     'routes' => array(
-        '^main$'          => 'home',
+        '^main$'          => 'index',
         
     ),
     
