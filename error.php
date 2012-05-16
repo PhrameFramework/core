@@ -66,8 +66,7 @@ class Error
                     'file'     => $exception->getFile(),
                     'line'     => $exception->getLine(),
                     'trace'    => $exception->getTrace()
-                ),
-                $app
+                )
             );
 
             echo $view;
@@ -81,7 +80,7 @@ class Error
      * @param   string  $errstr   Error message
      * @param   string  $errfile  Filename that the error was raised in
      * @param   int     $errline  Line number the error was raised at
-     * @return  void
+     * @return  bool
      */
     public function error_handler($errno, $errstr, $errfile, $errline)
     {
@@ -106,14 +105,20 @@ class Error
                     'message'  => $errstr,
                     'file'     => $errfile,
                     'line'     => $errline
-                ),
-                $app
+                )
             );
 
             echo $view;
         }
+
+        return true;
     }
 
+    /**
+     * Shutdown function
+     *
+     * @return  void
+     */
     public function shutdown_handler()
     {
         $last_error = error_get_last();
