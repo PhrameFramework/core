@@ -239,7 +239,7 @@ class Response
         $controller->init();
 
         // before_action filter
-        $before_action = $controller->filters['before_action'];
+        $before_action = isset($controller->filters['before_action']) ? $controller->filters['before_action'] : null;
         if (is_callable($before_action))
         {
             call_user_func($before_action, $controller);
@@ -249,7 +249,7 @@ class Response
         $output = call_user_func_array(array($controller, $action), $parameters);
 
         // after_action filter
-        $after_action = $controller->filters['after_action'];
+        $after_action = isset($controller->filters['after_action']) ? $controller->filters['after_action'] : null;
         if (is_callable($after_action))
         {
             call_user_func($after_action, $controller);
