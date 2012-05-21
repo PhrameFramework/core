@@ -24,14 +24,14 @@ class Controller
      * 
      * @var  string
      */
-    protected $app_name;
+    public $app_name;
 
     /**
      * Application object
      * 
      * @var  Application
      */
-    protected $app;
+    public $app;
 
     /**
      * Layout view object
@@ -39,6 +39,13 @@ class Controller
      * @var  View
      */
     public $layout;
+
+    /**
+     * Filters
+     *
+     * @var  array
+     */
+    public $filters = array();
 
     /**
      * Constructs Controller object
@@ -49,6 +56,19 @@ class Controller
     {
         $this->app_name  = $app_name ?: APPLICATION_NAME;
         $this->app       = Applications::get_instance($this->app_name);
+    }
+
+    /**
+     * Initializes some properties
+     *
+     * @return  void
+     */
+    public function init()
+    {
+        $this->filters = array(
+            'before_action'  => null,
+            'after_action'   => null,
+        );
     }
 
     /**

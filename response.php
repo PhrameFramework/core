@@ -217,10 +217,14 @@ class Response
      */
     public function get_body()
     {
-        $controller_class  = '\\'.ucfirst($this->app->route->application).'\\Controllers\\'.str_replace(' ', '\\', ucwords(str_replace('/', ' ', strtolower($this->app->route->controller))));
-        $controller        = new $controller_class($this->app->route->application);
-        $action            = $this->app->route->action;
-        $parameters        = $this->app->route->parameters;
+        $controller_class = '\\'.ucfirst($this->app->route->application).'\\Controllers\\'.str_replace(' ', '\\', ucwords(str_replace('/', ' ', strtolower($this->app->route->controller))));
+
+        /**
+         * @var  $controller  \Phrame\Core\Controller
+         */
+        $controller  = new $controller_class($this->app->route->application);
+        $action      = $this->app->route->action;
+        $parameters  = $this->app->route->parameters;
 
         if (APPLICATION_ENV === 'production')
         {
@@ -231,7 +235,25 @@ class Response
         {
             $controller->layout = new View('layout', array(), $this->app_name);
         }
+
+        $controller->init();
+
+        // before_action filter
+        $before_action = isset($controller->filters['before_action']) ? $controller->filters['before_action'] : null;
+        if (is_callable($before_action))
+        {
+            call_user_func($before_action, $controller);
+        }
+
+        // action
         $output = call_user_func_array(array($controller, $action), $parameters);
+
+        // after_action filter
+        $after_action = isset($controller->filters['after_action']) ? $controller->filters['after_action'] : null;
+        if (is_callable($after_action))
+        {
+            call_user_func($after_action, $controller);
+        }
 
         if (APPLICATION_ENV === 'production')
         {
