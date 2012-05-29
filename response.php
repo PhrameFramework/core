@@ -266,7 +266,7 @@ class Response
             $controller->layout->content = $output;
         }
 
-        return $controller->layout;
+        return $this->app->request->is_ajax() ? $controller->layout->content : $controller->layout;
     }
 
     /**
